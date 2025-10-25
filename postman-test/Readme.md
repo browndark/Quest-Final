@@ -2,7 +2,6 @@
 
 Data: 2025-10-25
 
-Resumo objetivo com resultados das execuções Newman (local)
 
 ## Testes Front
 
