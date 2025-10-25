@@ -2,7 +2,6 @@
 
 Data: 2025-10-24
 
-Este documento registra a sessão de aceite executada com Robot Framework contra a API e o front-end do projeto.
 
 Relatórios gerados
 
