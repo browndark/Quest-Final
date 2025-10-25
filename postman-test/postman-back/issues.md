@@ -1,8 +1,6 @@
 
 # Resultados dos testes automatizados (Postman) - Backend
 
-Resumo: executei a coleção `postman-test/postman-back/test-back.postman_collection.json` localmente e gerei um relatório JSON em `postman-test/reports/newman-back-report.json`.
-
 Data: 2025-10-25
 
 Observação geral
