@@ -1,0 +1,24 @@
+{"level":30,"time":"2025-10-25T15:07:54.459Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Listening on 127.0.0.1:58878"}
+{"level":30,"time":"2025-10-25T15:07:54.769Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-10-25T15:07:54.836Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Adding browser to stack: chromium, version: 141.0.7390.37"}
+{"level":30,"time":"2025-10-25T15:07:54.837Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-10-25T15:07:54.837Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-10-25T15:07:54.843Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method newContext"}
+{"level":30,"time":"2025-10-25T15:07:54.843Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Creating new context with options: {\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"width\":1280,\"height\":800}}"}
+{"level":30,"time":"2025-10-25T15:07:54.843Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@cb829319be8ef8439b6cb636758f0fa5\"},\"headless\":true,\"_contextStack\":[],\"id\":\"browser=fe1e40af-3f50-46c7-9feb-7d1f0089aeca\"}"}
+{"level":30,"time":"2025-10-25T15:07:54.843Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Trace file: "}
+{"level":30,"time":"2025-10-25T15:07:54.850Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Setting default timeout for context context=9cb5db00-f43b-44f5-89ca-cb773dbec3ff to 10000"}
+{"level":30,"time":"2025-10-25T15:07:54.850Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Changed active context: context=9cb5db00-f43b-44f5-89ca-cb773dbec3ff"}
+{"level":30,"time":"2025-10-25T15:07:54.850Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"End of node method newContext"}
+{"level":30,"time":"2025-10-25T15:07:54.854Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-10-25T15:07:54.855Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@cb829319be8ef8439b6cb636758f0fa5\"},\"headless\":true,\"_contextStack\":[{\"id\":\"context=9cb5db00-f43b-44f5-89ca-cb773dbec3ff\",\"c\":{\"_type\":\"BrowserContext\",\"_guid\":\"browser-context@403c897c6028095983ed8aad434eca6b\"},\"pageStack\":[],\"options\":{\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"width\":1280,\"height\":800}},\"traceFile\":\"\"}],\"id\":\"browser=fe1e40af-3f50-46c7-9feb-7d1f0089aeca\"}"}
+{"level":30,"time":"2025-10-25T15:07:54.915Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Video path: undefined"}
+{"level":30,"time":"2025-10-25T15:07:54.915Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Changed active page"}
+{"level":30,"time":"2025-10-25T15:07:54.920Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"End of node method newPage"}
+{"level":30,"time":"2025-10-25T15:07:54.923Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-25T15:07:54.927Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-25T15:08:25.048Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-25T15:08:25.049Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-25T15:08:25.051Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-25T15:08:25.052Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-25T15:08:26.151Z","pid":18280,"hostname":"DESKTOP-IUMEI63","msg":"Removed page=c383bbe0-5aa8-43fd-b115-96dd3f85dfc2 from context=9cb5db00-f43b-44f5-89ca-cb773dbec3ff page stack"}

@@ -1,0 +1,1138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-10-25T12:07:53.418130" rpa="false" schemaversion="5">
+<suite id="s1" name="Ui" source="c:\Users\Public\Workspace\QuestFinal\robot-tests\ui">
+<suite id="s1-s1" name="Check Base" source="c:\Users\Public\Workspace\QuestFinal\robot-tests\ui\check_base.robot">
+<test id="s1-s1-t1" name="Check Base" line="5">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-25T12:07:53.444137" level="INFO">BASE_FRONT=http://127.0.0.1:3002</msg>
+<arg>BASE_FRONT=${BASE_FRONT}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-25T12:07:53.443966" elapsed="0.000222"/>
+</kw>
+<status status="PASS" start="2025-10-25T12:07:53.443407" elapsed="0.000942"/>
+</test>
+<status status="PASS" start="2025-10-25T12:07:53.440965" elapsed="0.003868"/>
+</suite>
+<suite id="s1-s2" name="Ui Smoke" source="c:\Users\Public\Workspace\QuestFinal\robot-tests\ui\ui_smoke.robot">
+<kw name="Abrir navegador" owner="keywords_ui" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-10-25T12:07:53.717437" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "c:\\Users\\Public\\Workspace\\QuestFinal\\robot-tests\\reports\\ui\\browser\\traces\\temp\\d8305c70-7e3e-4245-b75a-9feb6ccfa9fe"}</msg>
+<msg time="2025-10-25T12:07:53.734395" level="INFO">Starting Browser process C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:58878</msg>
+<msg time="2025-10-25T12:07:54.838673" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"c:\\Users\\Public\\Workspace\\QuestFinal\\robot-tests\\reports\\ui\\browser\\traces\\temp\\d8305c70-7e3e-4245-b75a-9feb6ccfa9fe"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-10-25T12:07:53.716539" elapsed="1.122430"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-10-25T12:07:54.841346" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  }
+}</msg>
+<msg time="2025-10-25T12:07:54.852343" level="INFO">Successfully created context. </msg>
+<msg time="2025-10-25T12:07:54.852422" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 800}}</msg>
+<arg>viewport={'width':1280,'height':800}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-10-25T12:07:54.839270" elapsed="0.013227"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-10-25T12:07:54.921808" level="INFO">Successfully initialized new page object and opened url: about:blank</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-10-25T12:07:54.852739" elapsed="0.069261"/>
+</kw>
+<status status="PASS" start="2025-10-25T12:07:53.716039" elapsed="1.206071"/>
+</kw>
+<test id="s1-s2-t1" name="Home deve carregar" line="8">
+<kw name="Ir para home" owner="keywords_ui">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-25T12:07:54.929719" level="INFO">BASE_FRONT=http://127.0.0.1:3002</msg>
+<arg>BASE_FRONT=${BASE_FRONT}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-25T12:07:54.929476" elapsed="0.000290"/>
+</kw>
+<kw name="Wait For Frontend" owner="keywords_ui">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-10-25T12:07:54.930383" level="INFO">Creating Session using : alias=front, url=http://127.0.0.1:3002, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>front</arg>
+<arg>${BASE_FRONT}</arg>
+<arg>disable_warnings=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-10-25T12:07:54.930102" elapsed="0.000466"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:07:54.931310" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:07:54.955166" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:07:54.955301" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:07:54 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:07:54.955442" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:07:54.931208" elapsed="0.024263"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:07:54.955954" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:07:54.955615" elapsed="0.001672">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:07:54.930970" elapsed="0.026438">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:07:56.958548" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:07:56.963097" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:07:56.963164" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:07:56 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:07:56.963412" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:07:56.958434" elapsed="0.005005"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:07:56.963827" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:07:56.963551" elapsed="0.000789">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:07:56.957929" elapsed="0.006520">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:07:58.965426" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:07:58.968872" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:07:58.968929" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:07:58 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:07:58.969024" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:07:58.965315" elapsed="0.003732"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:07:58.969437" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:07:58.969160" elapsed="0.000707">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:07:58.964916" elapsed="0.005051">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:00.971041" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:00.974354" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:00.974419" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:00 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:00.974520" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:00.970902" elapsed="0.003641"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:00.974973" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:00.974673" elapsed="0.000761">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:00.970415" elapsed="0.005149">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:02.976717" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:02.980625" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:02.980804" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:02 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:02.980930" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:02.976548" elapsed="0.004408"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:02.981409" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:02.981092" elapsed="0.000771">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:02.975961" elapsed="0.006009">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:04.983084" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:04.987756" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:04.987822" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:04 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:04.987927" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:04.982948" elapsed="0.005003"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:04.988412" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:04.988087" elapsed="0.000795">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:04.982441" elapsed="0.006548">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:06.990089" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:06.993477" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:06.993531" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:06 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:06.993626" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:06.989932" elapsed="0.003717"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:06.994041" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:06.993767" elapsed="0.000699">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:06.989423" elapsed="0.005140">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:08.995591" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:08.998533" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:08.998620" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:08 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:08.998725" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:08.995426" elapsed="0.003321"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:08.999126" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:08.998858" elapsed="0.001081">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:08.994918" elapsed="0.005123">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:11.001009" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:11.004770" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:11.004825" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:11 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:11.004920" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:11.000904" elapsed="0.004039"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:11.005346" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:11.005059" elapsed="0.000737">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:11.000463" elapsed="0.005443">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:13.007040" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:13.010428" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:13.010495" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:13 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:13.010598" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:13.006905" elapsed="0.003716"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:13.011069" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:13.010779" elapsed="0.000733">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:13.006435" elapsed="0.005182">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:15.012533" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:15.015807" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:15.015939" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:15 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:15.016040" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:15.012407" elapsed="0.003656"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:15.016456" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:15.016180" elapsed="0.000705">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:15.011925" elapsed="0.005063">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:17.018050" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:17.021002" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:17.021073" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:17 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:17.021206" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:17.017906" elapsed="0.003326"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:17.021633" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:17.021352" elapsed="0.000719">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:17.017424" elapsed="0.004752">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:19.023595" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:19.026335" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:19.026388" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:19 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:19.026480" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:19.023434" elapsed="0.003069"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:19.026872" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:19.026612" elapsed="0.000688">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:19.022921" elapsed="0.004478">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:21.028514" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:21.031426" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:21.031511" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:21 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:21.031606" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:21.028388" elapsed="0.003239"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:21.031991" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:21.031737" elapsed="0.000695">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:21.027913" elapsed="0.004614">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:23.033501" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:23.036118" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:23.036167" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:23.036281" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:23.033391" elapsed="0.002917"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:23.036654" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:23.036409" elapsed="0.000675">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:23.032920" elapsed="0.004262">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:25.038596" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:25.041360" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:25.041418" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:25 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:25.041521" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:25.038444" elapsed="0.003100"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:25.041954" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:25.041664" elapsed="0.000743">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:25.037933" elapsed="0.004584">InvalidResponse: 200</status>
+</kw>
+<msg time="2025-10-25T12:08:25.042594" level="FAIL">Keyword 'Check Front Ready' failed after retrying for 30 seconds. The last error was: InvalidResponse: 200</msg>
+<arg>30s</arg>
+<arg>2s</arg>
+<arg>Check Front Ready</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="FAIL" start="2025-10-25T12:07:54.930667" elapsed="30.112001">Keyword 'Check Front Ready' failed after retrying for 30 seconds. The last error was: InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:07:54.929873" elapsed="30.112973">Keyword 'Check Front Ready' failed after retrying for 30 seconds. The last error was: InvalidResponse: 200</status>
+</kw>
+<kw name="Go To" owner="Browser">
+<arg>http://127.0.0.1:3002</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="NOT RUN" start="2025-10-25T12:08:25.042957" elapsed="0.000117"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<arg>css:body</arg>
+<arg>visible</arg>
+<arg>10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="NOT RUN" start="2025-10-25T12:08:25.043180" elapsed="0.000125"/>
+</kw>
+<status status="FAIL" start="2025-10-25T12:07:54.929042" elapsed="30.114359">Keyword 'Check Front Ready' failed after retrying for 30 seconds. The last error was: InvalidResponse: 200</status>
+</kw>
+<kw name="Get Title" owner="Browser">
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-10-25T12:08:25.043583" elapsed="0.000139"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<arg>css=h1,css=[data-testid="app-title"]</arg>
+<arg>visible</arg>
+<arg>10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="NOT RUN" start="2025-10-25T12:08:25.043878" elapsed="0.000103"/>
+</kw>
+<status status="FAIL" start="2025-10-25T12:07:54.922193" elapsed="30.121995">Keyword 'Check Front Ready' failed after retrying for 30 seconds. The last error was: InvalidResponse: 200</status>
+</test>
+<test id="s1-s2-t2" name="Navegação básica (exemplo) - Lista de filmes visível" line="14">
+<kw name="Ir para home" owner="keywords_ui">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-25T12:08:25.054734" level="INFO">BASE_FRONT=http://127.0.0.1:3002</msg>
+<arg>BASE_FRONT=${BASE_FRONT}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-25T12:08:25.054478" elapsed="0.000303"/>
+</kw>
+<kw name="Wait For Frontend" owner="keywords_ui">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:25.055425" level="INFO">Creating Session using : alias=front, url=http://127.0.0.1:3002, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>front</arg>
+<arg>${BASE_FRONT}</arg>
+<arg>disable_warnings=True</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-10-25T12:08:25.055152" elapsed="0.000423"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:25.056294" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:25.059775" level="INFO">GET Request : url=http://127.0.0.1:3002/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-25T12:08:25.059832" level="INFO">GET Response : url=http://127.0.0.1:3002/ 
+ status=200, reason=OK 
+ headers={'Vary': 'Origin', 'Content-Type': 'text/html', 'Cache-Control': 'no-cache', 'Etag': 'W/"3b2-Se0WeLx0J3dTXbM5Rgy0kQfassw"', 'Date': 'Sat, 25 Oct 2025 15:08:25 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5', 'Content-Length': '946'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;script type="module"&gt;import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () =&gt; {};
+window.$RefreshSig$ = () =&gt; (type) =&gt; type;&lt;/script&gt;
+
+  &lt;script type="module" src="/@vite/client"&gt;&lt;/script&gt;
+
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+  &lt;meta name="description" content="Cinema App - Seu aplicativo de cinema online" /&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;title&gt;Cinema App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2025-10-25T12:08:25.059924" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="PASS" start="2025-10-25T12:08:25.056188" elapsed="0.003758"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:25.060335" level="FAIL">InvalidResponse: 200</msg>
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-10-25T12:08:25.060060" elapsed="0.000706">InvalidResponse: 200</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:25.055950" elapsed="0.004916">InvalidResponse: 200</status>
+</kw>
+<kw name="Check Front Ready" owner="keywords_ui">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-10-25T12:08:27.062033" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<var>${resp}</var>
+<arg>front</arg>
+<arg>/</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-10-25T12:08:27.061886" elapsed="0.000626">Execution terminated by signal</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>${resp}</arg>
+<arg>200</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-10-25T12:08:27.062654" elapsed="0.000151"/>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:27.061412" elapsed="0.001498">Execution terminated by signal</status>
+</kw>
+<arg>30s</arg>
+<arg>2s</arg>
+<arg>Check Front Ready</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="FAIL" start="2025-10-25T12:08:25.055675" elapsed="2.007288">Execution terminated by signal</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:25.054898" elapsed="2.008133">Execution terminated by signal</status>
+</kw>
+<kw name="Go To" owner="Browser">
+<arg>http://127.0.0.1:3002</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="NOT RUN" start="2025-10-25T12:08:27.063110" elapsed="0.000109"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<arg>css:body</arg>
+<arg>visible</arg>
+<arg>10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="NOT RUN" start="2025-10-25T12:08:27.063322" elapsed="0.000104"/>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:25.054074" elapsed="2.009434">Execution terminated by signal</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:25.051116" elapsed="2.012569">Execution terminated by signal</status>
+</test>
+<kw name="Fechar navegador" owner="keywords_ui" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-10-25T12:08:27.070014" level="FAIL">ConnectionError: Playwright process has been terminated with code 130</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="FAIL" start="2025-10-25T12:08:27.069606" elapsed="0.002240">ConnectionError: Playwright process has been terminated with code 130</status>
+</kw>
+<status status="FAIL" start="2025-10-25T12:08:27.069381" elapsed="0.002647">ConnectionError: Playwright process has been terminated with code 130</status>
+</kw>
+<doc>Smoke do Front: abre home e verifica elementos básicos.</doc>
+<status status="FAIL" start="2025-10-25T12:07:53.445362" elapsed="33.626725">Suite teardown failed:
+ConnectionError: Playwright process has been terminated with code 130</status>
+</suite>
+<status status="FAIL" start="2025-10-25T12:07:53.419304" elapsed="33.654813"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Ui" id="s1" pass="1" fail="2" skip="0">Ui</stat>
+<stat name="Check Base" id="s1-s1" pass="1" fail="0" skip="0">Ui.Check Base</stat>
+<stat name="Ui Smoke" id="s1-s2" pass="0" fail="2" skip="0">Ui.Ui Smoke</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-10-25T12:07:54.931310" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:07:56.958548" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:07:58.965426" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:00.971041" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:02.976717" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:04.983084" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:06.990089" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:08.995591" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:11.001009" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:13.007040" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:15.012533" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:17.018050" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:19.023595" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:21.028514" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:23.033501" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:25.038596" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:25.056294" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:27.062033" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-10-25T12:08:27.068363" level="ERROR">Calling method '_end_test' of listener 'Browser' failed: ConnectionError: Playwright process has been terminated with code 130</msg>
+<msg time="2025-10-25T12:08:27.073138" level="ERROR">Calling method '_end_suite' of listener 'Browser' failed: ConnectionError: Playwright process has been terminated with code 130</msg>
+</errors>
+</robot>

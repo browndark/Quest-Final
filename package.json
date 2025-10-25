@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "jest": "^30.2.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudformation": "^3.917.0",
+    "@aws-sdk/client-codebuild": "^3.917.0",
+    "@aws-sdk/client-s3": "^3.917.0"
+  }
+}

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-10-24T20:10:16.038857" rpa="false" schemaversion="5">
+<suite id="s1" name="Ui" source="c:\Users\Public\Workspace\QuestFinal\robot-tests\ui">
+<suite id="s1-s1" name="Check Base" source="c:\Users\Public\Workspace\QuestFinal\robot-tests\ui\check_base.robot">
+<test id="s1-s1-t1" name="Check Base" line="5">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-24T20:10:16.064070" level="INFO">BASE_FRONT=http://localhost:5173</msg>
+<arg>BASE_FRONT=${BASE_FRONT}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-24T20:10:16.063923" elapsed="0.000193"/>
+</kw>
+<status status="PASS" start="2025-10-24T20:10:16.063371" elapsed="0.000918"/>
+</test>
+<status status="PASS" start="2025-10-24T20:10:16.061005" elapsed="0.003859"/>
+</suite>
+<suite id="s1-s2" name="Ui Smoke" source="c:\Users\Public\Workspace\QuestFinal\robot-tests\ui\ui_smoke.robot">
+<kw name="Abrir navegador" owner="keywords_ui" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-10-24T20:10:16.232226" level="INFO">{"browser": "chromium", "headless": true, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "c:\\Users\\Public\\Workspace\\QuestFinal\\robot-tests\\reports\\browser\\traces\\temp\\4a87aba1-50d6-49a0-9723-658b6f0b4e8c"}</msg>
+<msg time="2025-10-24T20:10:16.247113" level="INFO">Starting Browser process C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:58492</msg>
+<msg time="2025-10-24T20:10:17.323250" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":true,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"c:\\Users\\Public\\Workspace\\QuestFinal\\robot-tests\\reports\\browser\\traces\\temp\\4a87aba1-50d6-49a0-9723-658b6f0b4e8c"}</msg>
+<arg>chromium</arg>
+<arg>headless=True</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-10-24T20:10:16.231656" elapsed="1.091779"/>
+</kw>
+<kw name="New Context" owner="Browser">
+<msg time="2025-10-24T20:10:17.324872" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  }
+}</msg>
+<msg time="2025-10-24T20:10:17.332823" level="INFO">Successfully created context. </msg>
+<msg time="2025-10-24T20:10:17.332889" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1280, 'height': 800}}</msg>
+<arg>viewport={'width':1280,'height':800}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<status status="PASS" start="2025-10-24T20:10:17.323617" elapsed="0.009332"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-10-24T20:10:17.389888" level="INFO">Successfully initialized new page object and opened url: about:blank</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-10-24T20:10:17.333108" elapsed="0.056958"/>
+</kw>
+<status status="PASS" start="2025-10-24T20:10:16.231257" elapsed="1.158913"/>
+</kw>
+<test id="s1-s2-t1" name="Home deve carregar" line="8">
+<kw name="Ir para home" owner="keywords_ui">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-24T20:10:17.397827" level="INFO">BASE_FRONT=http://localhost:5173</msg>
+<arg>BASE_FRONT=${BASE_FRONT}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-24T20:10:17.397590" elapsed="0.000283"/>
+</kw>
+<kw name="Go To" owner="Browser">
+<msg time="2025-10-24T20:10:19.495262" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/fail-screenshot-1.png" target="_blank"&gt;&lt;img src="browser/screenshot/fail-screenshot-1.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<msg time="2025-10-24T20:10:19.495383" level="INFO">See also file:///c:/Users/Public/Workspace/QuestFinal/robot-tests/reports/playwright-log.txt for additional details.</msg>
+<msg time="2025-10-24T20:10:19.495674" level="FAIL">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+  - navigating to "http://127.0.0.1:3002/", waiting until "load"
+</msg>
+<arg>http://127.0.0.1:3002</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="FAIL" start="2025-10-24T20:10:17.397966" elapsed="2.101036">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+  - navigating to "http://127.0.0.1:3002/", waiting until "load"
+</status>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<arg>css:body</arg>
+<arg>visible</arg>
+<arg>10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="NOT RUN" start="2025-10-24T20:10:19.499170" elapsed="0.000142"/>
+</kw>
+<status status="FAIL" start="2025-10-24T20:10:17.397170" elapsed="2.102286">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+  - navigating to "http://127.0.0.1:3002/", waiting until "load"
+</status>
+</kw>
+<kw name="Get Title" owner="Browser">
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-10-24T20:10:19.499725" elapsed="0.000139"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<arg>css=h1,css=[data-testid="app-title"]</arg>
+<arg>visible</arg>
+<arg>10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="NOT RUN" start="2025-10-24T20:10:19.500056" elapsed="0.000118"/>
+</kw>
+<status status="FAIL" start="2025-10-24T20:10:17.390251" elapsed="2.110182">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+  - navigating to "http://127.0.0.1:3002/", waiting until "load"
+</status>
+</test>
+<test id="s1-s2-t2" name="Navegação básica (exemplo) - Lista de filmes visível" line="14">
+<kw name="Ir para home" owner="keywords_ui">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-24T20:10:19.511760" level="INFO">BASE_FRONT=http://localhost:5173</msg>
+<arg>BASE_FRONT=${BASE_FRONT}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-24T20:10:19.511535" elapsed="0.000270"/>
+</kw>
+<kw name="Go To" owner="Browser">
+<msg time="2025-10-24T20:10:19.724320" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/fail-screenshot-2.png" target="_blank"&gt;&lt;img src="browser/screenshot/fail-screenshot-2.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<msg time="2025-10-24T20:10:19.724443" level="INFO">See also file:///c:/Users/Public/Workspace/QuestFinal/robot-tests/reports/playwright-log.txt for additional details.</msg>
+<msg time="2025-10-24T20:10:19.724541" level="FAIL">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+  - navigating to "http://127.0.0.1:3002/", waiting until "load"
+</msg>
+<arg>http://127.0.0.1:3002</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="FAIL" start="2025-10-24T20:10:19.511896" elapsed="0.214159">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+  - navigating to "http://127.0.0.1:3002/", waiting until "load"
+</status>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<arg>css:body</arg>
+<arg>visible</arg>
+<arg>10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="NOT RUN" start="2025-10-24T20:10:19.726298" elapsed="0.000124"/>
+</kw>
+<status status="FAIL" start="2025-10-24T20:10:19.511190" elapsed="0.215341">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+  - navigating to "http://127.0.0.1:3002/", waiting until "load"
+</status>
+</kw>
+<status status="FAIL" start="2025-10-24T20:10:19.507460" elapsed="0.219331">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+  - navigating to "http://127.0.0.1:3002/", waiting until "load"
+</status>
+</test>
+<kw name="Fechar navegador" owner="keywords_ui" type="TEARDOWN">
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-10-24T20:10:19.758880" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-10-24T20:10:19.731072" elapsed="0.027962"/>
+</kw>
+<status status="PASS" start="2025-10-24T20:10:19.730784" elapsed="0.028348"/>
+</kw>
+<doc>Smoke do Front: abre home e verifica elementos básicos.</doc>
+<status status="FAIL" start="2025-10-24T20:10:16.065429" elapsed="3.693741"/>
+</suite>
+<status status="FAIL" start="2025-10-24T20:10:16.039950" elapsed="3.722785"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Ui" id="s1" pass="1" fail="2" skip="0">Ui</stat>
+<stat name="Check Base" id="s1-s1" pass="1" fail="0" skip="0">Ui.Check Base</stat>
+<stat name="Ui Smoke" id="s1-s2" pass="0" fail="2" skip="0">Ui.Ui Smoke</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

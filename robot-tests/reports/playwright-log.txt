@@ -1,0 +1,83 @@
+{"level":30,"time":"2025-10-24T23:10:16.918Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Listening on 127.0.0.1:58492"}
+{"level":30,"time":"2025-10-24T23:10:17.267Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-10-24T23:10:17.317Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Adding browser to stack: chromium, version: 141.0.7390.37"}
+{"level":30,"time":"2025-10-24T23:10:17.317Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-10-24T23:10:17.317Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-10-24T23:10:17.321Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method newContext"}
+{"level":30,"time":"2025-10-24T23:10:17.321Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Creating new context with options: {\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"width\":1280,\"height\":800}}"}
+{"level":30,"time":"2025-10-24T23:10:17.321Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@962accb6da2a630eabd5fb938743a8be\"},\"headless\":true,\"_contextStack\":[],\"id\":\"browser=8c860289-8ad3-43a0-81ef-91b36f91981a\"}"}
+{"level":30,"time":"2025-10-24T23:10:17.321Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Trace file: "}
+{"level":30,"time":"2025-10-24T23:10:17.326Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Setting default timeout for context context=871f7484-1dfe-4772-9e3f-40a46ca44814 to 10000"}
+{"level":30,"time":"2025-10-24T23:10:17.326Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Changed active context: context=871f7484-1dfe-4772-9e3f-40a46ca44814"}
+{"level":30,"time":"2025-10-24T23:10:17.326Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method newContext"}
+{"level":30,"time":"2025-10-24T23:10:17.329Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-10-24T23:10:17.330Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"currentBrowser: {\"name\":\"chromium\",\"browser\":{\"_type\":\"Browser\",\"_guid\":\"browser@962accb6da2a630eabd5fb938743a8be\"},\"headless\":true,\"_contextStack\":[{\"id\":\"context=871f7484-1dfe-4772-9e3f-40a46ca44814\",\"c\":{\"_type\":\"BrowserContext\",\"_guid\":\"browser-context@3a91a32c3affe6af227e2cff9431643f\"},\"pageStack\":[],\"options\":{\"acceptDownloads\":true,\"bypassCSP\":false,\"forcedColors\":\"none\",\"ignoreHTTPSErrors\":false,\"javaScriptEnabled\":true,\"offline\":false,\"reducedMotion\":\"no-preference\",\"serviceWorkers\":\"allow\",\"viewport\":{\"width\":1280,\"height\":800}},\"traceFile\":\"\"}],\"id\":\"browser=8c860289-8ad3-43a0-81ef-91b36f91981a\"}"}
+{"level":30,"time":"2025-10-24T23:10:17.379Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Video path: undefined"}
+{"level":30,"time":"2025-10-24T23:10:17.379Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Changed active page"}
+{"level":30,"time":"2025-10-24T23:10:17.384Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method newPage"}
+{"level":30,"time":"2025-10-24T23:10:17.386Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:17.391Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:17.394Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method goTo"}
+{"level":30,"time":"2025-10-24T23:10:19.424Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Error of node method goTo"}
+================= Original suppressed error =================
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+[2m  - navigating to "http://127.0.0.1:3002/", waiting until "load"[22m
+
+    at goTo (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js:11143:31)
+    at PlaywrightServer.goTo (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js:13663:34)
+    at Object.onReceiveHalfClose (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1464:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:595:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:635:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:394:18) {
+  name: 'Error'
+}
+=============================================================
+{"level":30,"time":"2025-10-24T23:10:19.427Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2025-10-24T23:10:19.427Z","pid":23784,"hostname":"DESKTOP-IUMEI63","Take screenshot with options: ":{"path":"c:\\Users\\Public\\Workspace\\QuestFinal\\robot-tests\\reports\\browser\\screenshot\\fail-screenshot-1.png","fileType":"png","fullPage":false,"timeout":10000,"omitBackground":false}}
+{"level":30,"time":"2025-10-24T23:10:19.489Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2025-10-24T23:10:19.498Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:19.500Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:19.504Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:19.505Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:19.508Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method goTo"}
+{"level":30,"time":"2025-10-24T23:10:19.673Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Error of node method goTo"}
+================= Original suppressed error =================
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:3002/
+Call log:
+[2m  - navigating to "http://127.0.0.1:3002/", waiting until "load"[22m
+
+    at goTo (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js:11143:31)
+    at PlaywrightServer.goTo (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js:13663:34)
+    at Object.onReceiveHalfClose (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1464:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:595:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:635:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:394:18) {
+  name: 'Error'
+}
+=============================================================
+{"level":30,"time":"2025-10-24T23:10:19.676Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2025-10-24T23:10:19.676Z","pid":23784,"hostname":"DESKTOP-IUMEI63","Take screenshot with options: ":{"path":"c:\\Users\\Public\\Workspace\\QuestFinal\\robot-tests\\reports\\browser\\screenshot\\fail-screenshot-2.png","fileType":"png","fullPage":false,"timeout":10000,"omitBackground":false}}
+{"level":30,"time":"2025-10-24T23:10:19.718Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2025-10-24T23:10:19.723Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:19.724Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:19.727Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method closeBrowser"}
+{"level":30,"time":"2025-10-24T23:10:19.730Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Removed page=77537aac-1fa4-4d82-8677-ac8a836c0e42 from context=871f7484-1dfe-4772-9e3f-40a46ca44814 page stack"}
+{"level":30,"time":"2025-10-24T23:10:19.753Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method closeBrowser"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js:12672:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js:13622:59)
+    at PlaywrightServer.setTimeout (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\index.js:13873:57)
+    at Object.onReceiveHalfClose (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1464:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:595:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:635:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\bruno\AppData\Local\Programs\Python\Python313\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:394:18)
+    at ServerHttp2Stream.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+=============================================================
+{"level":30,"time":"2025-10-24T23:10:19.756Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:19.756Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-10-24T23:10:19.779Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2025-10-24T23:10:19.779Z","pid":23784,"hostname":"DESKTOP-IUMEI63","msg":"End of node method closeAllBrowsers"}

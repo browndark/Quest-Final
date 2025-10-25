@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on win32)" generated="2025-10-24T19:02:00.737164" rpa="false" schemaversion="5">
+<suite id="s1" name="Api" source="C:\Users\Public\Workspace\QuestFinal\robot-tests\api">
+<suite id="s1-s1" name="Api Smoke" source="C:\Users\Public\Workspace\QuestFinal\robot-tests\api\api_smoke.robot">
+<kw name="Abrir sessão API" owner="keywords_api" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-10-24T19:02:00.828863" level="INFO">Creating Session using : alias=api, url=http://localhost:5000/api/v1, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api</arg>
+<arg>${BASE_API}</arg>
+<arg>disable_warnings=1</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-10-24T19:02:00.828667" elapsed="0.000345"/>
+</kw>
+<status status="PASS" start="2025-10-24T19:02:00.828360" elapsed="0.000718"/>
+</kw>
+<test id="s1-s1-t1" name="Health deve responder 200" line="7">
+<kw name="GET deve 200" owner="keywords_api">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-24T19:02:17.788944" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/health (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF13F52B10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</msg>
+<var>${resp}</var>
+<arg>api</arg>
+<arg>${path}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-10-24T19:02:00.829595" elapsed="16.965614">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/health (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF13F52B10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-10-24T19:02:17.795349" elapsed="0.000020"/>
+</kw>
+<return>
+<value>${resp}</value>
+<status status="NOT RUN" start="2025-10-24T19:02:17.795409" elapsed="0.000020"/>
+</return>
+<var>${resp}</var>
+<arg>/health</arg>
+<status status="FAIL" start="2025-10-24T19:02:00.829437" elapsed="16.966082">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/health (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF13F52B10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<status status="FAIL" start="2025-10-24T19:02:00.829123" elapsed="16.966675">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/health (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF13F52B10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</test>
+<test id="s1-s1-t2" name="Listar filmes deve responder 200 e lista" line="10">
+<kw name="GET deve 200" owner="keywords_api">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-24T19:02:34.735047" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/movies (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF13F77350&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</msg>
+<var>${resp}</var>
+<arg>api</arg>
+<arg>${path}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-10-24T19:02:17.796958" elapsed="16.941781">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/movies (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF13F77350&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-10-24T19:02:34.738879" elapsed="0.000022"/>
+</kw>
+<return>
+<value>${resp}</value>
+<status status="NOT RUN" start="2025-10-24T19:02:34.738937" elapsed="0.000018"/>
+</return>
+<var>${resp}</var>
+<arg>/movies</arg>
+<status status="FAIL" start="2025-10-24T19:02:17.796778" elapsed="16.942257">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/movies (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF13F77350&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${resp.json()} != None</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2025-10-24T19:02:34.739278" elapsed="0.000020"/>
+</kw>
+<status status="FAIL" start="2025-10-24T19:02:17.796436" elapsed="16.943071">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/movies (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF13F77350&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</test>
+<test id="s1-s1-t3" name="Admin consegue acessar reservas (200)" line="14">
+<kw name="Login admin e pegar token" owner="keywords_api">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-24T19:02:34.740892" level="INFO">${payload} = {'email': 'admin@example.com', 'password': 'password123'}</msg>
+<var>${payload}</var>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-24T19:02:34.740642" elapsed="0.000270"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-10-24T19:02:51.657634" level="FAIL">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF14350D10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</msg>
+<var>${resp}</var>
+<arg>api</arg>
+<arg>/auth/login</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-10-24T19:02:34.740980" elapsed="16.920153">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF14350D10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-10-24T19:02:51.661280" elapsed="0.000019"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${token}</var>
+<arg>${resp.json()['token']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-10-24T19:02:51.661458" elapsed="0.000015"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="NOT RUN" start="2025-10-24T19:02:51.661509" elapsed="0.000014"/>
+</return>
+<var>${token}</var>
+<status status="FAIL" start="2025-10-24T19:02:34.740421" elapsed="16.921177">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF14350D10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</kw>
+<kw name="GET auth deve 200" owner="keywords_api">
+<var>${resp}</var>
+<arg>/reservations</arg>
+<arg>${token}</arg>
+<status status="NOT RUN" start="2025-10-24T19:02:51.661906" elapsed="0.000027"/>
+</kw>
+<status status="FAIL" start="2025-10-24T19:02:34.740079" elapsed="16.922065">ConnectionError: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x000001FF14350D10&gt;: Failed to establish a new connection: [WinError 10061] Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente'))</status>
+</test>
+<doc>Smoke da API do cinema (health, movies, reservas).</doc>
+<status status="FAIL" start="2025-10-24T19:02:00.758412" elapsed="50.904726"/>
+</suite>
+<status status="FAIL" start="2025-10-24T19:02:00.738233" elapsed="50.925615"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="3" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Api" id="s1" pass="0" fail="3" skip="0">Api</stat>
+<stat name="Api Smoke" id="s1-s1" pass="0" fail="3" skip="0">Api.Api Smoke</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-10-24T19:02:00.760844" level="WARN">Error in file 'C:\Users\Public\Workspace\QuestFinal\robot-tests\resources\keywords_api.resource' on line 15: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-10-24T19:02:00.761133" level="WARN">Error in file 'C:\Users\Public\Workspace\QuestFinal\robot-tests\resources\keywords_api.resource' on line 21: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+<msg time="2025-10-24T19:02:00.761411" level="WARN">Error in file 'C:\Users\Public\Workspace\QuestFinal\robot-tests\resources\keywords_api.resource' on line 28: The '[Return]' setting is deprecated. Use the 'RETURN' statement instead.</msg>
+</errors>
+</robot>
