@@ -1,1 +1,4 @@
-node_modules
+﻿# arquivos que não vão pro git
+node_modules/
+dist/
+.env

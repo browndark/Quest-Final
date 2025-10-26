@@ -1,8 +1,7 @@
 
 # Issues geradas a partir da coleção `test-front`
-
-Este arquivo registra os problemas detectados ao aplicar as técnicas de teste (caixa-preta, nulo, boundary, injeção, negativo, concorrência) contra a coleção `postman-test/postman-front/test-front`.
-
+ 
+ O teste foi executado em ambiente controlado (simulado) com o uso de mock requests via Postman, reproduzindo cenários de erro (ECONNREFUSED) e sucesso (status 200 OK) com base nas rotas definidas. O objetivo foi avaliar a resiliência e resposta do sistema frente à indisponibilidade temporária do frontend.
 Resumo dos casos (exportado da coleção)
 
 1) Front - GET / (Home)
@@ -112,6 +111,8 @@ Causa raiz: ausência de token (login retornou 401).
 
 Recomendações: garantir que o usuário admin/de teste exista e o login retorne o token; então reexecutar para validar criação e testes de concorrência.
 
-<img width="1293" height="1034" alt="postfront" src="https://github.com/user-attachments/assets/31b9017b-85cc-4d4d-ac97-b731b384eaaa" />
+<img src="../../assets/postfront.png" alt="Resultados dos testes Postman Frontend" width="800">
+
+
 
 
