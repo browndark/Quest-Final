@@ -207,4 +207,6 @@ Com as melhorias de cobertura, atomicidade e mensagens padronizadas, o projeto e
 ## ✅ Agradecimentos:
  Quero agradecer pela oportunidade que a Compass UOL está oferecendo no programa de bolsas de estudos e aprendizado em QA. Tenho me esforçado ao máximo para ser efetivado. Também agradeço ao meu squad (Caio, Ana Lívia, Amilly e Eduardo), com quem enfrentei vários desafios como uma equipe de verdade. Neste último desafio, realizamos dailies para trocar informações e dar força uns aos outros. Obrigado pela parceria e pela confiança!
 
+<img width="995" height="1597" alt="ud" src="https://github.com/user-attachments/assets/d1e6f822-b0d7-44b3-a000-84e550ee74fc" />
+
 
