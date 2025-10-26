@@ -210,3 +210,4 @@ Com as melhorias de cobertura, atomicidade e mensagens padronizadas, o projeto e
 <img width="995" height="1597" alt="ud" src="https://github.com/user-attachments/assets/d1e6f822-b0d7-44b3-a000-84e550ee74fc" />
 
 
+<img width="1147" height="2216" alt="home" src="https://github.com/user-attachments/assets/e7352a85-6882-4536-b44a-9391c5d1fd4d" />
