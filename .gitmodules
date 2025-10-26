@@ -1,0 +1,8 @@
+[submodule "cinema-challenge-back"]
+	path = cinema-challenge-back
+	url = https://github.com/juniorschmitz/cinema-challenge-back
+	branch = main
+[submodule "cinema-challenge-front"]
+	path = cinema-challenge-front
+	url = https://github.com/juniorschmitz/cinema-challenge-front
+	branch = main
