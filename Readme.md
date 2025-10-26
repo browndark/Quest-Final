@@ -8,7 +8,7 @@
 
 ---
 
-## 📘 Sumário Rápido
+## * Sumário Rápido
 
 | Área / Ferramenta | Resultados | Cobertura / Status |
 |-------------------|-------------|---------------------|
@@ -80,7 +80,7 @@
 
 ---
 
-## 🧪 Diário de Execuções Automatizadas
+## * Diário de Execuções Automatizadas
 
 ### 2025-10-24 — Backend (Jest)
 - 3 suítes executadas: `api.test.js`, `routes.test.js`, `login-reservation.test.js`
@@ -109,7 +109,7 @@
 
 ---
 
-## 📈 Resultados Consolidados
+## * Resultados Consolidados
 
 | Tipo | Ferramenta | Resultado | Observação |
 |------|-------------|-----------|-------------|
@@ -121,7 +121,7 @@
 
 ---
 
-## 📊 Métricas de Cobertura (Backend)
+## * Métricas de Cobertura (Backend)
 
 | Métrica | Valor | Observação |
 |----------|--------|-------------|
@@ -134,7 +134,7 @@
 
 ---
 
-## 🧠 Técnicas de Teste Aplicadas
+## * Técnicas de Teste Aplicadas
 
 | Técnica | Aplicação | Objetivo |
 |----------|------------|-----------|
@@ -148,7 +148,7 @@
 
 ---
 
-## 🧱 Ações Recomendadas
+## * Ações Recomendadas
 
 | Prioridade | Ação |
 |-------------|------|
@@ -158,7 +158,7 @@
 
 ---
 
-## 🗂️ Artefatos Locais
+## * Artefatos Locais
 
 | Ferramenta | Caminho |
 |-------------|----------|
@@ -168,7 +168,7 @@
 | Cypress | `cinema-challenge-front/cypress/e2e` |
 | Vitest | `cinema-challenge-front/tests/` |
 
-## 🧪 Postman — Resultados das execuções (Front & Back)
+## * Postman — Resultados das execuções (Front & Back)
 
 Resumo objetivo das execuções Newman (local):
 
