@@ -1,0 +1,48 @@
+.auth-status-debug {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  z-index: 1000;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.auth-status-debug h3 {
+  margin: 0 0 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #555;
+  font-size: 14px;
+}
+
+.auth-status-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.label {
+  font-weight: bold;
+  color: #aaa;
+}
+
+.value {
+  color: #4caf50;
+}
+
+.value:empty::after {
+  content: '(empty)';
+  color: #f44336;
+  font-style: italic;
+}

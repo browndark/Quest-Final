@@ -1,0 +1,276 @@
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.checkout-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.checkout-header h1 {
+  font-size: var(--font-size-xl);
+  color: var(--primary);
+  margin-top: var(--spacing-md);
+}
+
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+}
+
+.order-summary,
+.payment-section {
+  background-color: var(--background-light);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  box-shadow: var(--box-shadow-sm);
+}
+
+.order-summary h2,
+.payment-section h2 {
+  font-size: var(--font-size-lg);
+  color: var(--primary);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Movie Info Section */
+.movie-info {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.movie-poster {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+}
+
+.movie-details h3 {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.movie-details p {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Seats Info Section */
+.seats-info {
+  margin-bottom: var(--spacing-lg);
+}
+
+.seats-info h3 {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.selected-seats-list {
+  list-style: none;
+  padding: 0;
+}
+
+.seat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+.seat-item:last-child {
+  border-bottom: none;
+}
+
+.seat-type {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Price Summary */
+.price-summary {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.price-detail {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: var(--font-size-md);
+}
+
+.price {
+  color: var(--primary);
+}
+
+/* Payment Methods */
+.payment-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payment-method.selected {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+.payment-method:hover {
+  border-color: var(--primary);
+}
+
+.payment-icon {
+  font-size: 24px;
+  color: var(--primary);
+}
+
+.payment-note {
+  background-color: var(--background);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.checkout-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-checkout {
+  min-width: 200px;
+  font-size: var(--font-size-md);
+}
+
+/* Confirmation Page Styles */
+.checkout-confirmation {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--background-light);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
+  box-shadow: var(--box-shadow-md);
+}
+
+.confirmation-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.confirmation-icon {
+  font-size: 64px;
+  color: var(--success);
+  margin-bottom: var(--spacing-md);
+}
+
+.confirmation-header h1 {
+  color: var(--success);
+  margin-bottom: var(--spacing-sm);
+}
+
+.confirmation-details {
+  margin-bottom: var(--spacing-xl);
+}
+
+.confirmation-details h2 {
+  font-size: var(--font-size-lg);
+  color: var(--primary);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.confirmation-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-label {
+  font-weight: bold;
+}
+
+.info-item.total {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+  font-size: var(--font-size-md);
+}
+
+.confirmation-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .checkout-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .payment-methods {
+    grid-template-columns: 1fr;
+  }
+  
+  .confirmation-actions {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Loading States */
+.loading-container {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid var(--accent-light);
+  border-top: 5px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

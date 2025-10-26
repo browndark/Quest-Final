@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="450px" viewBox="0 0 300 450" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rect width="300" height="450" fill="#f0f0f0" />
+    <g fill="#9b92c9">
+        <path d="M150,120 C168,120 182,134 182,152 C182,170 168,184 150,184 C132,184 118,170 118,152 C118,134 132,120 150,120 Z" />
+        <path d="M150,185 C184,185 210,210 210,244 L210,270 L90,270 L90,244 C90,210 116,185 150,185 Z" />
+    </g>
+    <text x="150" y="320" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#8b5cf6">
+        Imagem não disponível
+    </text>
+    <text x="150" y="350" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#8b5cf6">
+        Cinema App
+    </text>
+</svg>

@@ -1,0 +1,151 @@
+.api-diagnostics {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.diagnostic-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.btn-primary {
+  background-color: #4a90e2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #3a78c2;
+}
+
+.btn-primary:disabled {
+  background-color: #a8c7f0;
+  cursor: not-allowed;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.button-group h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.button-group button {
+  background-color: #ebebeb;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.button-group button:hover {
+  background-color: #d4d4d4;
+}
+
+.button-group button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.advanced-test-btn {
+  margin-top: 10px;
+  background-color: #f0ad4e !important;
+  color: white !important;
+  font-weight: bold;
+  border-color: #eea236 !important;
+}
+
+.advanced-test-btn:hover {
+  background-color: #ec971f !important;
+}
+
+.results-container {
+  margin-top: 30px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.results-container h3 {
+  margin: 0;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.results-log {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.loading {
+  padding: 10px;
+  text-align: center;
+  font-style: italic;
+  color: #666;
+}
+
+.no-results {
+  text-align: center;
+  color: #888;
+  padding: 30px;
+}
+
+.log-entry {
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border-left: 4px solid transparent;
+}
+
+.log-entry.info {
+  border-left-color: #4a90e2;
+}
+
+.log-entry.error {
+  border-left-color: #e74c3c;
+  background-color: #ffeaea;
+}
+
+.log-entry.warning {
+  border-left-color: #f39c12;
+  background-color: #fff8e8;
+}
+
+.log-entry.group {
+  border-left-color: #3498db;
+  background-color: #e8f4fc;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  color: #888;
+  margin-right: 10px;
+}
+
+.log-message {
+  margin: 5px 0 0;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 13px;
+}
