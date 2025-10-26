@@ -17,7 +17,6 @@ Evidência: erro de requisição – connect ECONNREFUSED 127.0.0.1:3002 (Postma
 
 Severidade da falha: Alta (indisponibilidade do frontend)
 
-Sugestão de correção: iniciar o frontend (Vite) em http://127.0.0.1:3002, verificar os logs do Vite e garantir o health-check readiness antes de executar a coleção.
 
 2) API - GET /health
 
