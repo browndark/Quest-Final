@@ -46,3 +46,6 @@ Evidências (trechos do relatório)
 
 ---
 Arquivo relatório completo: `postman-test/reports/newman-back-report.json`
+<img width="1499" height="1118" alt="postback" src="https://github.com/user-attachments/assets/f0217b10-bfc9-4e1a-804c-06a298646c48" />
+
+
