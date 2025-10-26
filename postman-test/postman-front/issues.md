@@ -68,4 +68,6 @@ Resumo dos casos (exportado da coleção)
 	- Recomendações: ensure admin/test user exists and login returns token; then re-run to validate reservation creation and concurrency tests.
 
 
+<img width="1293" height="1034" alt="postfront" src="https://github.com/user-attachments/assets/31b9017b-85cc-4d4d-ac97-b731b384eaaa" />
+
 
