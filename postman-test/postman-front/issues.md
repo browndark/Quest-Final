@@ -6,67 +6,112 @@ Este arquivo registra os problemas detectados ao aplicar as técnicas de teste (
 Resumo dos casos (exportado da coleção)
 
 1) Front - GET / (Home)
-	- Técnica aplicada: Smoke / Caixa-preta
-	- O que valida: 200 OK e presença de `<body` no HTML
-	- Resultado: FAIL
-	- Evidência: request error connect ECONNREFUSED 127.0.0.1:3002 (Postman/newman). Assertions failed: "Front status is 200" and "Front body contains <body>" due to no response.
-	- Severidade se falhar: Alto (disponibilidade do front)
-	- Sugestão de correção: iniciar o frontend (Vite) em `http://127.0.0.1:3002`, verificar logs do Vite e health-check readiness antes de rodar a coleção.
+
+Técnica aplicada: Smoke / Caixa-preta
+
+O que valida: código 200 OK e presença de <body no HTML
+
+Resultado: FALHA
+
+Evidência: erro de requisição – connect ECONNREFUSED 127.0.0.1:3002 (Postman/Newman). Asserções falharam: “status do Front é 200” e “Front contém <body>”, devido à ausência de resposta.
+
+Severidade da falha: Alta (indisponibilidade do frontend)
+
+Sugestão de correção: iniciar o frontend (Vite) em http://127.0.0.1:3002, verificar os logs do Vite e garantir o health-check readiness antes de executar a coleção.
 
 2) API - GET /health
-	- Técnica aplicada: Smoke / Caixa-preta
-	- O que valida: 200 OK e JSON válido
-	- Resultado: PASS
-	- Evidência: 200 OK, response JSON (newman run). See `postman-test/reports/newman-front-report.json` (execution for this request shows code 200, responseTime 12ms).
-	- Severidade se falhar: Crítico (pipeline/infra)
+
+Técnica aplicada: Smoke / Caixa-preta
+
+O que valida: 200 OK e JSON válido
+
+Resultado: SUCESSO
+
+Evidência: 200 OK, resposta JSON (Newman run). Ver postman-test/reports/newman-front-report.json (execução mostra código 200, tempo de resposta 12 ms).
+
+Severidade da falha (se ocorresse): Crítica (infraestrutura/pipeline)
 
 3) API - GET /movies
-	- Técnica aplicada: Caixa-preta / Boundary (lista vazia)
-	- O que valida: 200 OK e retorno de array/obj
-	- Resultado: PASS
-	- Evidência: 200 OK, JSON array/object returned (newman run; responseSize ~1.35kB).
+
+Técnica aplicada: Caixa-preta / Boundary (lista vazia)
+
+O que valida: 200 OK e retorno de array/objeto
+
+Resultado: SUCESSO
+
+Evidência: 200 OK, JSON retornando array/objeto (~1.35 kB).
 
 4) API - POST /auth/login (admin)
-	- Técnica aplicada: Caixa-preta / Equivalence partitioning
-	- O que valida: 200/201 e token no JSON
-	- Resultado: FAIL
-	- Evidência: 401 Unauthorized returned for credentials `admin@admin.com` / `admin`. Assertions failed: expected 200/201 and expected `token` property in response. See `postman-test/reports/newman-front-report.json` (login response: { success: false, ... }).
-	- Severidade se falhar: Alto (fluxos autenticados dependem disso)
-	- Recomendações: execute `POST /setup/test-users` prior to this collection (seed users) or start backend with `USE_IN_MEMORY_DB=true` and ensure `JWT_SECRET` is set for tests. Verify that admin user exists and password matches.
 
-5) API - POST /auth/login (empty) - NULL
-	- Técnica aplicada: Nulo / Negative
-	- O que valida: receber 400 ou 401
-	- Resultado: PASS
-	- Evidência: Request returned 401 Unauthorized (acceptable for empty credentials).
+Técnica aplicada: Caixa-preta / Partição de equivalência
 
-6) API - POST /auth/login (injection) - FUZZ
-	- Técnica aplicada: Injeção / Fuzzing
-	- O que valida: não retornar 200; rejeitar entrada maliciosa
-	- Resultado: PASS
-	- Evidência: Request returned 401 Unauthorized (did not return 200). No evidence of injection success in this run.
-	- Severidade se falhar: Crítico (vulnerabilidade de segurança)
+O que valida: 200/201 e presença de token no JSON
 
-7) API - GET /movies/:id (invalid) - NEGATIVE
-	- Técnica aplicada: Negative
-	- O que valida: 400 ou 404 para id inválido
-	- Resultado: PASS
-	- Evidência: Request returned 404 Not Found for `invalid-id-123` as expected.
+Resultado: FALHA
 
-8) API - POST /reservations (missing seats) - NULL
-	- Técnica aplicada: Nulo / Negative
-	- O que valida: 400/422 quando `seats` ausente
-	- Resultado: FAIL
-	- Evidência: Request returned 401 Unauthorized (newman). Assertion expected 400/422 but got 401 — likely caused by missing auth token because login step failed.
-	- Recomendações: fix authentication/seed user issue first; once token is available, re-run and validate 400/422 behavior for missing seats.
+Evidência: retorno 401 Unauthorized para as credenciais admin@admin.com / admin. Asserções falharam: esperado 200/201 e propriedade token no JSON. Ver postman-test/reports/newman-front-report.json (resposta: { success: false, ... }).
 
-9) API - POST /reservations (create)
-	- Técnica aplicada: Caixa-preta / Concurrency (ver abaixo)
-	- O que valida: retorna 200/201 e id de reserva
-	- Resultado: FAIL
-	- Evidência: Request returned 401 Unauthorized; assertions expecting 200/201 and reservation id failed. Root cause: no auth token (login returned 401).
-	- Recomendações: ensure admin/test user exists and login returns token; then re-run to validate reservation creation and concurrency tests.
+Severidade: Alta (fluxos autenticados dependem disso)
 
+Recomendações: executar POST /setup/test-users antes da coleção (popular usuários de teste) ou iniciar o backend com USE_IN_MEMORY_DB=true e definir JWT_SECRET para os testes. Verificar se o usuário admin existe e se a senha está correta.
+
+5) API - POST /auth/login (vazio)
+
+Técnica aplicada: Nulo / Negativo
+
+O que valida: deve retornar 400 ou 401
+
+Resultado: SUCESSO
+
+Evidência: requisição retornou 401 Unauthorized (aceitável para credenciais vazias).
+
+6) API - POST /auth/login (injeção)
+
+Técnica aplicada: Injeção / Fuzzing
+
+O que valida: não retornar 200; rejeitar entrada maliciosa
+
+Resultado: SUCESSO
+
+Evidência: requisição retornou 401 Unauthorized (não retornou 200). Nenhum sinal de sucesso de injeção nesta execução.
+
+Severidade se falhar: Crítica (vulnerabilidade de segurança)
+
+7) API - GET /movies/:id (inválido)
+
+Técnica aplicada: Negativo
+
+O que valida: 400 ou 404 para ID inválido
+
+Resultado: SUCESSO
+
+Evidência: requisição retornou 404 Not Found para invalid-id-123, conforme esperado.
+
+8) API - POST /reservations (sem assentos)
+
+Técnica aplicada: Nulo / Negativo
+
+O que valida: 400/422 quando o campo seats está ausente
+
+Resultado: FALHA
+
+Evidência: requisição retornou 401 Unauthorized (Newman). A asserção esperava 400/422, mas obteve 401 — provavelmente causado pela ausência de token (login falhou).
+
+Recomendações: corrigir o problema de autenticação/usuário de teste primeiro; depois, validar o comportamento 400/422 quando o campo seats estiver ausente.
+
+9) API - POST /reservations (criação)
+
+Técnica aplicada: Caixa-preta / Concorrência
+
+O que valida: retorno 200/201 e ID de reserva
+
+Resultado: FALHA
+
+Evidência: requisição retornou 401 Unauthorized; asserções esperando 200/201 e ID de reserva falharam.
+
+Causa raiz: ausência de token (login retornou 401).
+
+Recomendações: garantir que o usuário admin/de teste exista e o login retorne o token; então reexecutar para validar criação e testes de concorrência.
 
 <img width="1293" height="1034" alt="postfront" src="https://github.com/user-attachments/assets/31b9017b-85cc-4d4d-ac97-b731b384eaaa" />
 
