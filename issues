@@ -1,0 +1,884 @@
+# 🐛 Catálogo de Issues - Cinema App
+
+> **Data:** 26/10/2025  
+> **Branch:** Cypress++  
+> **Ambiente:** Backend (5000) + Frontend (3002)  
+> **Testes:** Cypress 12.17.3 + Electron 106  
+
+---
+
+## 📊 **RESUMO EXECUTIVO**
+
+| Categoria | Total | 🔴 Crítico | 🟡 Médio | 🟢 Baixo |
+|-----------|-------|------------|----------|----------|
+| **Frontend** | 4 | 1 | 2 | 1 |
+| **Backend** | 2 | 0 | 1 | 1 |
+| **Testes** | 3 | 1 | 1 | 1 |
+| **Git/Deploy** | 1 | 0 | 0 | 1 |
+| **TOTAL** | **10** | **2** | **4** | **4** |
+
+---
+
+## 🔴 **ISSUES CRÍTICAS (Prioridade Alta)**
+
+### **ISSUE #001 - Forms Não Encontrados na Página Principal**
+- **Categoria:** Frontend
+- **Severidade:** 🔴 **CRÍTICA**
+- **Arquivo:** `cinema-challenge-front/src/pages/*`
+- **Teste que falhou:** `button-tests.cy.js` - Form submit buttons
+- **Erro:** `Expected to find element: 'form', but never found it`
+
+**Descrição:**
+```
+Os testes Cypress não conseguem encontrar elementos <form> na página principal
+da aplicação, causando falha em testes de submissão de formulários.
+```
+
+**Como reproduzir:**
+```javascript
+cy.visit('http://127.0.0.1:3002')
+cy.get('form').should('exist') // ❌ FALHA
+```
+
+**Solução:**
+```javascript
+// Adicionar formulários nas páginas relevantes:
+// Em Login.jsx:
+<form onSubmit={handleLogin}>
+  <input type="email" name="email" required />
+  <input type="password" name="password" required />
+  <button type="submit">Login</button>
+</form>
+
+// Em Register.jsx:
+<form onSubmit={handleRegister}>
+  <input type="text" name="name" required />
+  <input type="email" name="email" required />
+  <input type="password" name="password" required />
+  <button type="submit">Registrar</button>
+</form>
+```
+
+**Estimativa:** 2 horas
+
+---
+
+### **ISSUE #002 - Seletor Indefinido em Loop de Elementos**
+- **Categoria:** Testes
+- **Severidade:** 🔴 **CRÍTICA**
+- **Arquivo:** `cypress/e2e/button-loading-states.cy.js`
+- **Teste que falhou:** `should test button states and interactions`
+- **Erro:** `Expected to find element: undefined, but never found it`
+
+**Descrição:**
+```
+Erro de JavaScript no loop de seletores, causando falha em teste de loading states.
+Variável de seletor não está sendo definida corretamente.
+```
+
+**Como reproduzir:**
+```javascript
+buttonSelectors.forEach((selector) => {
+  if ($body.find(selector).length > 0) {
+    cy.get(selector) // ❌ selector pode ser undefined
+  }
+})
+```
+
+**Solução:**
+```javascript
+// Corrigir validação de seletor:
+buttonSelectors.forEach((selector) => {
+  if (selector && $body.find(selector).length > 0) {
+    cy.get(selector).should('exist')
+  }
+})
+
+// Ou usar filter antes:
+const validSelectors = buttonSelectors.filter(s => s && s.length > 0)
+```
+
+**Estimativa:** 30 minutos
+
+---
+
+## 🟡 **ISSUES MÉDIAS (Prioridade Média)**
+
+### **ISSUE #003 - Protocolo data: Não Suportado pelo Cypress**
+- **Categoria:** Testes
+- **Severidade:** 🟡 **MÉDIA**
+- **Arquivo:** `cypress/e2e/button-test-results.cy.js`, `button-tests-offline.cy.js`
+- **Teste que falhou:** Todos os testes offline (6/6)
+- **Erro:** `Error: Invalid protocol: data:`
+
+**Descrição:**
+```
+Testes tentam usar URLs data:text/html inline que o Cypress não suporta,
+causando falhas em todos os testes offline.
+```
+
+**Como reproduzir:**
+```javascript
+cy.visit('data:text/html,<html><body><h1>Test</h1></body></html>')
+// ❌ Error: Invalid protocol: data:
+```
+
+**Solução:**
+```javascript
+// Opção 1: Criar arquivo HTML temporário
+before(() => {
+  cy.writeFile('cypress/fixtures/test-page.html', `
+    <html>
+      <body>
+        <h1>Test Page</h1>
+        <button id="test-btn">Test Button</button>
+      </body>
+    </html>
+  `)
+})
+
+it('should test offline page', () => {
+  cy.visit('/fixtures/test-page.html')
+})
+
+// Opção 2: Usar cy.document()
+it('should test inline content', () => {
+  cy.visit('about:blank')
+  cy.document().then((doc) => {
+    doc.write(`
+      <html>
+        <body>
+          <button id="test">Test</button>
+        </body>
+      </html>
+    `)
+  })
+})
+```
+
+**Estimativa:** 1 hora
+
+---
+
+### **ISSUE #004 - Loading States Não Implementados**
+- **Categoria:** Frontend
+- **Severidade:** 🟡 **MÉDIA**
+- **Arquivo:** `cinema-challenge-front/src/components/**`
+- **Teste que detectou:** `button-loading-states.cy.js`
+- **Comportamento:** Botões não mostram estado visual de carregamento
+
+**Descrição:**
+```
+Botões de submit não implementam estados visuais de loading (spinner, texto),
+resultando em UX ruim e possibilidade de duplo-clique.
+```
+
+**Como reproduzir:**
+```javascript
+cy.get('button').click()
+// Botão não muda visualmente durante operação assíncrona
+```
+
+**Solução:**
+```javascript
+// Implementar useState para loading:
+const [isLoading, setIsLoading] = useState(false)
+
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setIsLoading(true)
+  try {
+    await api.post('/login', formData)
+  } finally {
+    setIsLoading(false)
+  }
+}
+
+return (
+  <button 
+    type="submit" 
+    disabled={isLoading}
+    className={`btn ${isLoading ? 'loading' : ''}`}
+  >
+    {isLoading ? (
+      <>
+        <span className="spinner"></span>
+        Carregando...
+      </>
+    ) : (
+      'Login'
+    )}
+  </button>
+)
+
+// CSS para spinner:
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+```
+
+**Estimativa:** 3 horas
+
+---
+
+### **ISSUE #005 - Configuração de Proxy Inconsistente**
+- **Categoria:** Backend
+- **Severidade:** 🟡 **MÉDIA**
+- **Arquivo:** `cinema-challenge-front/vite.config.mjs`
+- **Teste que detectou:** Conexão entre frontend e backend
+- **Erro:** Inconsistência entre portas configuradas
+
+**Descrição:**
+```
+Configuração de proxy no Vite apontava para porta 5000, mas backend
+algumas vezes roda na 3000, causando ECONNREFUSED.
+```
+
+**Como reproduzir:**
+```javascript
+// vite.config.mjs tinha:
+proxy: {
+  '/api': 'http://localhost:5000' // ❌ Inconsistente
+}
+
+// Mas backend às vezes roda na 3000
+const PORT = process.env.PORT || 3000
+```
+
+**Solução:**
+```javascript
+// Padronizar para porta 5000:
+// No backend (cinema-challenge-back/src/index.js):
+const PORT = process.env.PORT || 5000
+
+// No frontend (vite.config.mjs):
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  }
+})
+
+// No .env:
+PORT=5000
+VITE_API_URL=http://localhost:5000
+```
+
+**Estimativa:** 15 minutos
+
+---
+
+### **ISSUE #006 - Error Handling Limitado**
+- **Categoria:** Frontend
+- **Severidade:** 🟡 **MÉDIA**
+- **Arquivo:** `cinema-challenge-front/src/pages/**`
+- **Teste que detectou:** `button-error-handling.cy.js`
+- **Comportamento:** Tratamento básico de erros
+
+**Descrição:**
+```
+Aplicação não possui tratamento robusto de erros (mensagens, recovery),
+detectado pelos testes de error handling.
+```
+
+**Solução:**
+```javascript
+// Implementar contexto de erro:
+const ErrorContext = createContext()
+
+export const ErrorProvider = ({ children }) => {
+  const [error, setError] = useState(null)
+  
+  const showError = (message, type = 'error') => {
+    setError({ message, type, timestamp: Date.now() })
+    setTimeout(() => setError(null), 5000)
+  }
+  
+  return (
+    <ErrorContext.Provider value={{ error, showError }}>
+      {children}
+      {error && (
+        <div className={`alert alert-${error.type}`}>
+          {error.message}
+        </div>
+      )}
+    </ErrorContext.Provider>
+  )
+}
+
+// Usar nos componentes:
+const { showError } = useContext(ErrorContext)
+
+try {
+  await api.post('/login', data)
+} catch (err) {
+  showError(err.response?.data?.message || 'Erro no login')
+}
+```
+
+**Estimativa:** 2 horas
+
+---
+
+## 🟢 **ISSUES BAIXAS (Prioridade Baixa)**
+
+### **ISSUE #007 - Falta de Data-Testid Attributes**
+- **Categoria:** Frontend
+- **Severidade:** 🟢 **BAIXA**
+- **Arquivo:** `cinema-challenge-front/src/components/**`
+- **Teste que detectou:** Todos os testes Cypress
+- **Comportamento:** Seletores CSS instáveis
+
+**Descrição:**
+```
+Componentes não possuem data-testid, forçando testes a usar seletores
+CSS instáveis que podem quebrar com mudanças de estilo.
+```
+
+**Solução:**
+```javascript
+// Adicionar data-testid em botões importantes:
+<button data-testid="login-button" type="submit">
+  Login
+</button>
+
+<button data-testid="register-button" type="submit">
+  Registrar
+</button>
+
+<form data-testid="login-form">
+  <input data-testid="email-input" type="email" />
+  <input data-testid="password-input" type="password" />
+</form>
+
+// Nos testes:
+cy.get('[data-testid="login-button"]').click()
+```
+
+**Estimativa:** 1 hora
+
+---
+
+### **ISSUE #008 - JWT_SECRET Hardcoded**
+- **Categoria:** Backend
+- **Severidade:** 🟢 **BAIXA**
+- **Arquivo:** `cinema-challenge-back/.env`
+- **Teste que detectou:** Configuração de ambiente
+- **Comportamento:** Segurança básica
+
+**Descrição:**
+```
+JWT_SECRET está hardcoded no código ou .env versionado,
+representando risco de segurança menor em desenvolvimento.
+```
+
+**Solução:**
+```javascript
+// Gerar JWT_SECRET dinâmico:
+// No .env.example:
+JWT_SECRET=your-super-secret-key-here
+
+// No código:
+const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex')
+
+if (!process.env.JWT_SECRET) {
+  console.warn('⚠️ JWT_SECRET not set, using random key (not for production!)')
+}
+```
+
+**Estimativa:** 10 minutos
+
+---
+
+### **ISSUE #009 - Browserslist Desatualizado**
+- **Categoria:** Frontend
+- **Severidade:** 🟢 **BAIXA**
+- **Arquivo:** `cinema-challenge-front/package.json`
+- **Teste que detectou:** Warnings do Cypress
+- **Erro:** `Browserslist: caniuse-lite is outdated`
+
+**Descrição:**
+```
+Database do Browserslist desatualizado causando warnings durante build
+e testes, mas não afeta funcionalidade.
+```
+
+**Solução:**
+```bash
+# Atualizar browserslist:
+npx update-browserslist-db@latest
+
+# Ou instalar automaticamente:
+npm run update-browserslist
+
+# Adicionar no package.json scripts:
+"scripts": {
+  "update-browserslist": "npx update-browserslist-db@latest"
+}
+```
+
+**Estimativa:** 5 minutos
+
+---
+
+### **ISSUE #010 - Submódulos Git Convertidos**
+- **Categoria:** Git/Deploy
+- **Severidade:** 🟢 **BAIXA** ✅ **RESOLVIDA**
+- **Arquivo:** `.git/config`, `cinema-challenge-*`
+- **Teste que detectou:** Navegação no GitHub
+- **Erro:** Pastas azuis levando a 404
+
+**Descrição:**
+```
+Pastas cinema-challenge-* eram submódulos Git (modo 160000) causando
+links quebrados no GitHub. RESOLVIDO convertendo para pastas normais.
+```
+
+**Solução Aplicada:**
+```bash
+# ✅ JÁ RESOLVIDO:
+git rm --cached cinema-challenge-back cinema-challenge-front
+rm -rf cinema-challenge-*/\.git
+git add cinema-challenge-back/ cinema-challenge-front/
+git commit -m "fix: Convert submodules to regular folders"
+git push
+```
+
+**Status:** ✅ **RESOLVIDA**
+
+---
+
+## 🔧 **PLANO DE AÇÃO RECOMENDADO**
+
+### **Sprint 1 (Prioridade Crítica - 1 dia)**
+1. **ISSUE #001** - Implementar formulários nas páginas
+2. **ISSUE #002** - Corrigir seletor indefinido nos testes
+
+### **Sprint 2 (Prioridade Média - 2 dias)**
+3. **ISSUE #003** - Refatorar testes offline
+4. **ISSUE #004** - Implementar loading states
+5. **ISSUE #005** - Padronizar configuração de proxy
+6. **ISSUE #006** - Melhorar error handling
+
+### **Sprint 3 (Prioridade Baixa - 0.5 dia)**
+7. **ISSUE #007** - Adicionar data-testid
+8. **ISSUE #008** - Melhorar segurança JWT
+9. **ISSUE #009** - Atualizar browserslist
+
+---
+
+## 📈 **MÉTRICAS DE QUALIDADE**
+
+### **Antes das Correções:**
+- 🔴 **Taxa de Sucesso:** 70% (16/23 testes)
+- 🔴 **Issues Críticas:** 2
+- 🔴 **Coverage:** Parcial
+
+### **Após Correções (Estimado):**
+- 🟢 **Taxa de Sucesso:** 95% (22/23 testes)
+- 🟢 **Issues Críticas:** 0
+- 🟢 **Coverage:** Completo
+
+### **Tempo Total Estimado:** 3.5 dias
+### **ROI:** Alto (melhoria significativa na qualidade)
+
+---
+
+## 🧪 **ISSUES ENCONTRADAS NOS TESTES EXPLORATÓRIOS**
+
+### **ISSUE #011 - Erro 500 no Registro de Usuário**
+- **Categoria:** Backend
+- **Severidade:** 🔴 **CRÍTICA**
+- **Arquivo:** `cinema-challenge-back/src/controllers/authController.js`
+- **Teste que detectou:** Teste exploratório manual - Cadastro de usuário
+- **Erro:** `500 Internal Server Error` no endpoint `POST /api/v1/register`
+
+**Descrição:**
+```
+Todos os cadastros válidos retornam erro 500, impedindo criação de novos usuários.
+Frontend envia dados corretos mas backend falha no processamento.
+```
+
+**Como reproduzir:**
+```javascript
+// Dados válidos enviados:
+{
+  "name": "Ana Teste",
+  "email": "ana.teste+1@exemplo.com", 
+  "password": "Teste@1234",
+  "confirmPassword": "Teste@1234"
+}
+// Resultado: HTTP 500 Internal Server Error
+```
+
+**Possíveis causas:**
+- Conexão com banco de dados inativa
+- Campo `confirmPassword` não tratado no backend
+- Validação server-side ausente
+- Hash de senha falhando
+- E-mail duplicado sem tratamento
+
+**Solução:**
+```javascript
+// 1. Validar payload com Zod/Joi:
+const RegisterSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  password: z.string().min(8)
+});
+
+// 2. Tratar duplicidade:
+try {
+  const user = await User.create(data);
+  res.status(201).json({ id: user._id, email: user.email });
+} catch (err) {
+  if (err.code === 11000) {
+    return res.status(409).json({ message: 'E-mail já cadastrado' });
+  }
+  next(err);
+}
+
+// 3. Middleware de erro global:
+app.use((err, req, res, next) => {
+  console.error('[ERROR]', err);
+  res.status(500).json({ message: 'Erro interno do servidor' });
+});
+```
+
+**Estimativa:** 4 horas
+
+---
+
+### **ISSUE #012 - Erro 500 na Listagem de Filmes**
+- **Categoria:** Backend
+- **Severidade:** 🔴 **CRÍTICA**
+- **Arquivo:** `cinema-challenge-back/src/controllers/movieController.js`
+- **Teste que detectou:** Teste exploratório - Menu "Filmes em Cartaz"
+- **Erro:** `GET /api/v1/movies?limit=20` retorna `500 Internal Server Error`
+
+**Descrição:**
+```
+Página de filmes não carrega devido a erro 500 na API de listagem.
+Frontend exibe "Nenhum filme encontrado" mas deveria mostrar lista ou erro adequado.
+```
+
+**Como reproduzir:**
+```javascript
+// Request enviado:
+GET /api/v1/movies?limit=20
+// Resultado: HTTP 500 Internal Server Error
+```
+
+**Solução:**
+```javascript
+// Controller resiliente:
+app.get('/api/v1/movies', async (req, res, next) => {
+  try {
+    const { limit = 20 } = req.query;
+    const movies = await Movie.find().limit(Number(limit));
+    res.status(200).json({ 
+      items: movies, 
+      total: movies.length 
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Seed de dados para desenvolvimento:
+await Movie.insertMany([
+  { title: 'Filme 1', genre: 'Ação' },
+  { title: 'Filme 2', genre: 'Drama' }
+]);
+```
+
+**Estimativa:** 2 horas
+
+---
+
+### **ISSUE #013 - Validação de E-mail Inadequada no Backend**
+- **Categoria:** Backend
+- **Severidade:** 🟡 **MÉDIA**
+- **Arquivo:** `cinema-challenge-back/src/controllers/authController.js`
+- **Teste que detectou:** Teste exploratório - Validação de e-mail (partições/limites)
+- **Erro:** E-mails inválidos passam no frontend mas causam erro 500 no backend
+
+**Descrição:**
+```
+Valores como 'a@b.c', '.nome@exemplo.com', 'no..me@exemplo.com' passam na 
+validação HTML5 mas causam erro 500 no backend por falta de validação server-side.
+```
+
+**Casos que falharam:**
+| E-mail | Resultado Esperado | Resultado Obtido |
+|--------|-------------------|------------------|
+| `a@b.c` | 400 Bad Request | 500 Internal Server Error |
+| `.nome@exemplo.com` | 400 Bad Request | 500 Internal Server Error |
+| `no..me@exemplo.com` | 400 Bad Request | 500 Internal Server Error |
+| `nome@exemplo` | 400 Bad Request | 500 Internal Server Error |
+
+**Solução:**
+```javascript
+// Validação robusta no backend:
+const emailSchema = z.string()
+  .email('E-mail inválido')
+  .refine(email => {
+    // Não pode começar/terminar com ponto
+    if (email.startsWith('.') || email.includes('.@') || email.includes('@.')) {
+      return false;
+    }
+    // Não pode ter pontos consecutivos
+    if (email.includes('..')) {
+      return false;
+    }
+    // TLD deve ter pelo menos 2 caracteres
+    const parts = email.split('@');
+    if (parts.length !== 2) return false;
+    const domain = parts[1];
+    const tld = domain.split('.').pop();
+    return tld && tld.length >= 2;
+  }, 'Formato de e-mail inválido');
+
+// Retornar 400 em vez de 500:
+try {
+  const validatedData = emailSchema.parse(req.body.email);
+} catch (error) {
+  return res.status(400).json({ 
+    message: 'E-mail inválido. Use formato: usuario@dominio.com' 
+  });
+}
+```
+
+**Estimativa:** 1 hora
+
+---
+
+### **ISSUE #014 - Mensagens de Erro Genéricas no Frontend**
+- **Categoria:** Frontend
+- **Severidade:** 🟡 **MÉDIA**
+- **Arquivo:** `cinema-challenge-front/src/pages/Register/index.jsx`
+- **Teste que detectou:** Teste exploratório - Cadastro e validações
+- **Comportamento:** Sempre exibe "Erro ao registrar usuário" independente do erro real
+
+**Descrição:**
+```
+Frontend não mapeia códigos de status HTTP para mensagens específicas,
+resultando em UX ruim para o usuário que não sabe o que está errado.
+```
+
+**Solução:**
+```javascript
+// Melhorar tratamento de erros:
+try {
+  await api.post('/auth/register', formData);
+  toast.success('Conta criada com sucesso! Faça login.');
+  navigate('/login');
+} catch (error) {
+  if (!error.response) {
+    return toast.error('Servidor indisponível. Tente novamente.');
+  }
+  
+  const { status, data } = error.response;
+  const message = data?.message || 'Erro desconhecido';
+  
+  switch (status) {
+    case 400:
+      toast.error(`Dados inválidos: ${message}`);
+      break;
+    case 409:
+      toast.error('E-mail já cadastrado. Tente fazer login.');
+      break;
+    case 500:
+      toast.error('Erro interno. Contate o suporte.');
+      break;
+    default:
+      toast.error(`Erro ${status}: ${message}`);
+  }
+}
+```
+
+**Estimativa:** 1 hora
+
+---
+
+### **ISSUE #015 - Validação HTML5 em Inglês**
+- **Categoria:** Frontend
+- **Severidade:** 🟢 **BAIXA**
+- **Arquivo:** `cinema-challenge-front/src/pages/Register/index.jsx`
+- **Teste que detectou:** Teste exploratório - Campos obrigatórios
+- **Comportamento:** Mensagens do navegador aparecem em inglês ("Please fill out this field")
+
+**Descrição:**
+```
+Mensagens de validação HTML5 aparecem no idioma do navegador (inglês),
+reduzindo usabilidade para usuários brasileiros.
+```
+
+**Solução:**
+```javascript
+// Customizar mensagens de validação:
+<input 
+  type="text"
+  name="name"
+  required
+  oninvalid="this.setCustomValidity('Por favor, preencha este campo')"
+  oninput="this.setCustomValidity('')"
+/>
+
+<input 
+  type="email"
+  name="email"
+  required
+  oninvalid="this.setCustomValidity('Informe um e-mail válido')"
+  oninput="this.setCustomValidity('')"
+/>
+
+// Ou usar validação personalizada:
+const validateForm = () => {
+  if (!name.trim()) {
+    setErrors(prev => ({ ...prev, name: 'Nome é obrigatório' }));
+    return false;
+  }
+  if (!email.includes('@')) {
+    setErrors(prev => ({ ...prev, email: 'E-mail inválido' }));
+    return false;
+  }
+  return true;
+};
+```
+
+**Estimativa:** 30 minutos
+
+---
+
+### **ISSUE #016 - Falta de Debounce nos Botões**
+- **Categoria:** Frontend
+- **Severidade:** 🟡 **MÉDIA**
+- **Arquivo:** `cinema-challenge-front/src/pages/Register/index.jsx`
+- **Teste que detectou:** Teste exploratório - Múltiplos cliques
+- **Comportamento:** Botões permitem múltiplos cliques rápidos
+
+**Descrição:**
+```
+Usuário pode clicar múltiplas vezes no botão "Cadastrar", causando
+múltiplas requisições e potencial comportamento inesperado.
+```
+
+**Solução:**
+```javascript
+// Implementar loading state e debounce:
+const [isSubmitting, setIsSubmitting] = useState(false);
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  if (isSubmitting) return; // Previne múltiplos cliques
+  
+  setIsSubmitting(true);
+  try {
+    await api.post('/auth/register', formData);
+    // sucesso...
+  } catch (error) {
+    // erro...
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+return (
+  <button 
+    type="submit" 
+    disabled={isSubmitting}
+    className={`btn ${isSubmitting ? 'loading' : ''}`}
+  >
+    {isSubmitting ? 'Cadastrando...' : 'Cadastrar'}
+  </button>
+);
+```
+
+**Estimativa:** 30 minutos
+
+---
+
+### **ISSUE #017 - Conexão com Banco de Dados Instável**
+- **Categoria:** Backend
+- **Severidade:** 🔴 **CRÍTICA**
+- **Arquivo:** `cinema-challenge-back/src/config/db.js`
+- **Teste que detectou:** Múltiplos testes exploratórios
+- **Comportamento:** Erros 500 generalizados sugerem problemas de conexão
+
+**Descrição:**
+```
+Múltiplos endpoints retornando erro 500 sugere problema na conexão
+com banco de dados ou configuração inadequada.
+```
+
+**Solução:**
+```javascript
+// Melhorar conexão e error handling:
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.DATABASE_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`✅ MongoDB conectado: ${conn.connection.host}`);
+  } catch (error) {
+    console.error('❌ Erro ao conectar MongoDB:', error.message);
+    process.exit(1);
+  }
+};
+
+// Middleware para verificar conexão:
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({ 
+      message: 'Banco de dados indisponível' 
+    });
+  }
+  next();
+});
+
+// Endpoint de health check:
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    timestamp: new Date().toISOString()
+  });
+});
+```
+
+**Estimativa:** 1 hora
+
+---
+
+## 📊 **RESUMO ATUALIZADO DAS ISSUES**
+
+| Categoria | Total | 🔴 Crítico | 🟡 Médio | 🟢 Baixo |
+|-----------|-------|------------|----------|----------|
+| **Frontend** | 7 | 1 | 4 | 2 |
+| **Backend** | 6 | 3 | 2 | 1 |
+| **Testes** | 3 | 1 | 1 | 1 |
+| **Git/Deploy** | 1 | 0 | 0 | 1 |
+| **TOTAL** | **17** | **5** | **7** | **5** |
+
+### **Novas Issues Críticas Adicionadas:**
+- **#011** - Erro 500 no registro de usuário
+- **#012** - Erro 500 na listagem de filmes  
+- **#017** - Conexão instável com banco de dados
+
+### **Estimativa Total Atualizada:** 6 dias
+### **Prioridade Máxima:** Corrigir erros 500 no backend
+
+---
