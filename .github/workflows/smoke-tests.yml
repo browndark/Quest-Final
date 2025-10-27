@@ -8,3 +8,4 @@ jobs:
     steps:
       - name: Pass
         run: echo "ok"
+        run: echo "ok"
