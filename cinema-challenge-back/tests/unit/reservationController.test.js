@@ -106,9 +106,12 @@ describe('ReservationController - Unit Tests', () => {
         session: 'session1'
       };
 
+      // Mock do encadeamento: findById().populate().populate()
       const mockChain = {
-        populate: jest.fn().mockResolvedValue(mockReservation)
+        populate: jest.fn().mockReturnThis()
       };
+      // O último populate retorna a reserva
+      mockChain.populate.mockResolvedValueOnce(mockChain).mockResolvedValueOnce(mockReservation);
 
       Reservation.findById.mockReturnValue(mockChain);
 
@@ -118,14 +121,16 @@ describe('ReservationController - Unit Tests', () => {
         success: true,
         data: mockReservation
       });
+      expect(next).not.toHaveBeenCalled();
     });
 
     it('deve retornar erro 404 se reserva não encontrada', async () => {
       req.params.id = 'reservation123';
 
       const mockChain = {
-        populate: jest.fn().mockResolvedValue(null)
+        populate: jest.fn().mockReturnThis()
       };
+      mockChain.populate.mockResolvedValueOnce(mockChain).mockResolvedValueOnce(null);
 
       Reservation.findById.mockReturnValue(mockChain);
 
@@ -136,6 +141,7 @@ describe('ReservationController - Unit Tests', () => {
         success: false,
         message: 'Reservation not found'
       });
+      expect(next).not.toHaveBeenCalled();
     });
 
     it('deve retornar erro 403 se usuário não é dono nem admin', async () => {
@@ -149,8 +155,9 @@ describe('ReservationController - Unit Tests', () => {
       };
 
       const mockChain = {
-        populate: jest.fn().mockResolvedValue(mockReservation)
+        populate: jest.fn().mockReturnThis()
       };
+      mockChain.populate.mockResolvedValueOnce(mockChain).mockResolvedValueOnce(mockReservation);
 
       Reservation.findById.mockReturnValue(mockChain);
 
@@ -161,6 +168,7 @@ describe('ReservationController - Unit Tests', () => {
         success: false,
         message: 'Not authorized to access this reservation'
       });
+      expect(next).not.toHaveBeenCalled();
     });
 
     it('deve permitir acesso se usuário é admin', async () => {
@@ -174,8 +182,9 @@ describe('ReservationController - Unit Tests', () => {
       };
 
       const mockChain = {
-        populate: jest.fn().mockResolvedValue(mockReservation)
+        populate: jest.fn().mockReturnThis()
       };
+      mockChain.populate.mockResolvedValueOnce(mockChain).mockResolvedValueOnce(mockReservation);
 
       Reservation.findById.mockReturnValue(mockChain);
 
@@ -185,6 +194,7 @@ describe('ReservationController - Unit Tests', () => {
         success: true,
         data: mockReservation
       });
+      expect(next).not.toHaveBeenCalled();
     });
   });
 
