@@ -6,4 +6,5 @@ jobs:
   pass:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 0
+      - name: Pass
+        run: echo "ok"
