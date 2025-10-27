@@ -14,9 +14,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20.x
-      - working-directory: ./cinema-challenge-back
+      - name: Install
+        working-directory: ./cinema-challenge-back
         run: npm ci
-      - working-directory: ./cinema-challenge-back
+      - name: Test
+        working-directory: ./cinema-challenge-back
         run: npm test -- --coverage || exit 0
         env:
           USE_IN_MEMORY_DB: true
