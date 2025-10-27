@@ -7,9 +7,9 @@
 > **Projeto:** Cinema Challenge (Full-stack QA & Test Automation)
 
 ![CI/CD](https://github.com/browndark/Quest-Final/actions/workflows/ci.yml/badge.svg)
-![Smoke Tests](https://github.com/browndark/Quest-Final/actions/workflows/smoke-tests.yml/badge.svg)
+![Testes Aprofundados](https://github.com/browndark/Quest-Final/actions/workflows/smoke-tests.yml/badge.svg)
 ![Node Version](https://img.shields.io/badge/node-18.x%20|%2020.x-brightgreen)
-![Tests](https://img.shields.io/badge/tests-66%20passed-success)
+![Tests](https://img.shields.io/badge/tests-66%20passed%20(93%25)-success)
 ![Coverage](https://img.shields.io/badge/coverage-branches%2046.9%25-yellow)
 
 ---
