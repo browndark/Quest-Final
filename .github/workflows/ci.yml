@@ -108,7 +108,6 @@ jobs:
             kill $(cat .server.pid) || true
             rm .server.pid
           fi
-          fi
 
   # ============================================
   # JOB 2: Testes Frontend (Cypress) - SIMPLIFICADO
@@ -184,24 +183,15 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📁 Arquivos: cypress/e2e/**/*.cy.js" >> $GITHUB_STEP_SUMMARY
       
-      - name: 📊 Upload relatórios Cypress
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: cypress-reports-${{ matrix.browser }}
-          path: |
-            cinema-challenge-front/cypress/results/
-            cinema-challenge-front/cypress/reports/
-          retention-days: 30
-      
       - name: 🛑 Parar servidores
         if: always()
         run: |
           if [ -f cinema-challenge-front/.frontend.pid ]; then
-      
-      - name: 🛑 Cleanup
-        if: always()
-        run: |
+            kill $(cat cinema-challenge-front/.frontend.pid) || true
+          fi
+          if [ -f cinema-challenge-back/.server.pid ]; then
+            kill $(cat cinema-challenge-back/.server.pid) || true
+          fi
           pkill -f "node.*cinema-challenge" || true
           
   # ============================================
