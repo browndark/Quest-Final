@@ -19,6 +19,27 @@
 | **Cypress** | ✅ 1 smoke | home.cy.js |
 | **Vitest (Front)** | ✅ 1 smoke | runner operacional |
 
+## 📊 **RESUMO DAS ISSUES**
+
+| Categoria | Total | 🔴 Crítico | 🟡 Médio | 🟢 Baixo |
+|-----------|-------|------------|----------|----------|
+| **Frontend** | 7 | 1 | 4 | 2 |
+| **Backend** | 6 | 3 | 2 | 1 |
+| **Testes** | 3 | 1 | 1 | 1 |
+| **Git/Deploy** | 1 | 0 | 0 | 1 |
+| **TOTAL** | **17** | **5** | **7** | **5** |
+
+---
+
+## 🔴 **ISSUES CRÍTICAS (Prioridade Alta)**
+
+### **ISSUE #001 - Forms Não Encontrados na Página Principal**
+- **Categoria:** Frontend
+- **Severidade:** 🔴 **CRÍTICA**
+- **Arquivo:** `cinema-challenge-front/src/pages/*`
+- **Teste que falhou:** `button-tests.cy.js` - Form submit buttons
+- **Erro:** `Expected to find element: 'form', but never found it`
+
 ---
 
 ## 🧩 Relatório Consolidado de Testes
@@ -207,7 +228,7 @@ Com as melhorias de cobertura, atomicidade e mensagens padronizadas, o projeto e
 ## ✅ Agradecimentos:
  Quero agradecer pela oportunidade que a Compass UOL está oferecendo no programa de bolsas de estudos e aprendizado em QA. Tenho me esforçado ao máximo para ser efetivado. Também agradeço ao meu squad (Caio, Ana Lívia, Amilly e Eduardo), com quem enfrentei vários desafios como uma equipe de verdade. Neste último desafio, realizamos dailies para trocar informações e dar força uns aos outros. Obrigado pela parceria e pela confiança!
 
-<img width="995" height="1597" alt="ud" src="https://github.com/user-attachments/assets/d1e6f822-b0d7-44b3-a000-84e550ee74fc" />
+<img src="./assets/ud.png" alt="Mapa-Mental" width="500">
 
 
 
