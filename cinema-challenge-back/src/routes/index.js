@@ -11,6 +11,38 @@ const router = express.Router();
 
 /**
  * @swagger
+ * /health:
+ *   get:
+ *     summary: API Health Check
+ *     tags: [Health]
+ *     responses:
+ *       200:
+ *         description: API is healthy
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "healthy"
+ *                 timestamp:
+ *                   type: string
+ *                   example: "2024-01-01T00:00:00.000Z"
+ *                 uptime:
+ *                   type: number
+ *                   example: 123.45
+ */
+router.get('/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
+/**
+ * @swagger
  * /:
  *   get:
  *     summary: Get API information
@@ -69,7 +101,8 @@ router.get('/', (req, res) => {
       theaters: '/theaters',
       sessions: '/sessions',
       reservations: '/reservations',
-      setup: '/setup (development only)'
+      setup: '/setup (development only)',
+      health: '/health'
     },
     documentation: '/docs'
   });
