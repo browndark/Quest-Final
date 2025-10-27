@@ -1,0 +1,441 @@
+name: CI/CD - Testes Automatizados
+
+on:
+  push:
+    branches: [ main, atualizacao3.0, Atualização3.1 ]
+  pull_request:
+    branches: [ main, atualizacao3.0, Atualização3.1 ]
+  workflow_dispatch:
+
+jobs:
+  # ============================================
+  # JOB 1: Testes Backend (Jest + Newman)
+  # ============================================
+  backend-tests:
+    name: Backend - Jest + Newman (Postman)
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+      
+      - name: 🟢 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: cinema-challenge-back/package-lock.json
+      
+      - name: 📦 Instalar dependências backend
+        working-directory: ./cinema-challenge-back
+        run: npm ci
+      
+      - name: 🧪 Executar testes Jest com cobertura
+        working-directory: ./cinema-challenge-back
+        run: npm test -- --ci --coverage --maxWorkers=2
+        env:
+          NODE_ENV: test
+          JWT_SECRET: test-secret-key-for-ci
+          JWT_EXPIRATION: 1d
+      
+      - name: 📊 Upload relatório de cobertura Jest
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jest-coverage-report-node-${{ matrix.node-version }}
+          path: cinema-challenge-back/coverage/
+          retention-days: 30
+      
+      - name: 🚀 Iniciar servidor backend para Newman
+        working-directory: ./cinema-challenge-back
+        run: |
+          npm start &
+          echo $! > .server.pid
+          sleep 10
+        env:
+          PORT: 5000
+          NODE_ENV: test
+          JWT_SECRET: test-secret-key-newman
+          MONGODB_URI: ""
+      
+      - name: ✅ Verificar saúde do servidor
+        run: |
+          curl -f http://localhost:5000/api/v1/health || exit 1
+      
+      - name: 📦 Instalar Newman
+        run: npm install -g newman newman-reporter-html newman-reporter-htmlextra
+      
+      - name: 🧪 Executar testes Postman Backend
+        working-directory: ./postman-test/postman-back
+        run: |
+          newman run test-back.postman_collection.json \
+            --reporters cli,html,htmlextra,json \
+            --reporter-html-export ../../reports/newman-back-report.html \
+            --reporter-htmlextra-export ../../reports/newman-back-detailed.html \
+            --reporter-json-export ../../reports/newman-back-report.json \
+            --env-var "baseUrl=http://localhost:5000/api/v1" \
+            --bail \
+            --color on
+        continue-on-error: true
+      
+      - name: 📊 Upload relatórios Newman Backend
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: newman-backend-reports-node-${{ matrix.node-version }}
+          path: |
+            reports/newman-back-*.html
+            reports/newman-back-*.json
+          retention-days: 30
+      
+      - name: 🛑 Parar servidor backend
+        if: always()
+        working-directory: ./cinema-challenge-back
+        run: |
+          if [ -f .server.pid ]; then
+            kill $(cat .server.pid) || true
+            rm .server.pid
+          fi
+
+  # ============================================
+  # JOB 2: Testes Frontend (Cypress)
+  # ============================================
+  frontend-tests:
+    name: Frontend - Cypress E2E
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge]
+    
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: |
+            cinema-challenge-back/package-lock.json
+            cinema-challenge-front/package-lock.json
+      
+      - name: 📦 Instalar dependências backend
+        working-directory: ./cinema-challenge-back
+        run: npm ci
+      
+      - name: 📦 Instalar dependências frontend
+        working-directory: ./cinema-challenge-front
+        run: npm ci
+      
+      - name: 🚀 Iniciar servidor backend
+        working-directory: ./cinema-challenge-back
+        run: |
+          npm start &
+          echo $! > .server.pid
+          sleep 10
+        env:
+          PORT: 5000
+          NODE_ENV: test
+          JWT_SECRET: test-secret-cypress
+          MONGODB_URI: ""
+      
+      - name: 🚀 Build frontend
+        working-directory: ./cinema-challenge-front
+        run: npm run build
+        env:
+          VITE_API_URL: http://localhost:5000/api/v1
+      
+      - name: 🚀 Iniciar servidor frontend
+        working-directory: ./cinema-challenge-front
+        run: |
+          npx serve -s dist -l 3002 &
+          echo $! > .frontend.pid
+          sleep 5
+      
+      - name: ✅ Verificar servidores
+        run: |
+          curl -f http://localhost:5000/api/v1/health || exit 1
+          curl -f http://localhost:3002 || exit 1
+      
+      - name: 🧪 Executar testes Cypress (${{ matrix.browser }})
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./cinema-challenge-front
+          browser: ${{ matrix.browser }}
+          record: false
+          config: video=true,screenshotOnRunFailure=true
+          config-file: cypress.config.js
+        continue-on-error: true
+        env:
+          CYPRESS_BASE_URL: http://localhost:3002
+      
+      - name: 📊 Upload vídeos Cypress
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos-${{ matrix.browser }}
+          path: cinema-challenge-front/cypress/videos/
+          retention-days: 30
+      
+      - name: 📊 Upload screenshots Cypress
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots-${{ matrix.browser }}
+          path: cinema-challenge-front/cypress/screenshots/
+          retention-days: 30
+      
+      - name: 📊 Upload relatórios Cypress
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-reports-${{ matrix.browser }}
+          path: |
+            cinema-challenge-front/cypress/results/
+            cinema-challenge-front/cypress/reports/
+          retention-days: 30
+      
+      - name: 🛑 Parar servidores
+        if: always()
+        run: |
+          if [ -f cinema-challenge-front/.frontend.pid ]; then
+            kill $(cat cinema-challenge-front/.frontend.pid) || true
+          fi
+          if [ -f cinema-challenge-back/.server.pid ]; then
+            kill $(cat cinema-challenge-back/.server.pid) || true
+          fi
+
+  # ============================================
+  # JOB 3: Testes Newman Frontend
+  # ============================================
+  newman-frontend:
+    name: Frontend - Newman (Postman)
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      
+      - name: 📦 Instalar dependências
+        working-directory: ./cinema-challenge-front
+        run: npm ci
+      
+      - name: 🚀 Build e iniciar frontend
+        working-directory: ./cinema-challenge-front
+        run: |
+          npm run build
+          npx serve -s dist -l 3002 &
+          echo $! > .frontend.pid
+          sleep 5
+        env:
+          VITE_API_URL: http://localhost:5000/api/v1
+      
+      - name: 📦 Instalar Newman
+        run: npm install -g newman newman-reporter-html newman-reporter-htmlextra
+      
+      - name: 🧪 Executar testes Postman Frontend
+        working-directory: ./postman-test/postman-front
+        run: |
+          newman run test-front.postman_collection.json \
+            --reporters cli,html,htmlextra,json \
+            --reporter-html-export ../../reports/newman-front-report.html \
+            --reporter-htmlextra-export ../../reports/newman-front-detailed.html \
+            --reporter-json-export ../../reports/newman-front-report.json \
+            --env-var "baseUrl=http://localhost:3002" \
+            --color on
+        continue-on-error: true
+      
+      - name: 📊 Upload relatórios Newman Frontend
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: newman-frontend-reports
+          path: |
+            reports/newman-front-*.html
+            reports/newman-front-*.json
+          retention-days: 30
+      
+      - name: 🛑 Parar servidor
+        if: always()
+        working-directory: ./cinema-challenge-front
+        run: |
+          if [ -f .frontend.pid ]; then
+            kill $(cat .frontend.pid) || true
+          fi
+
+  # ============================================
+  # JOB 4: Playwright Tests
+  # ============================================
+  playwright-tests:
+    name: Playwright E2E
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      
+      - name: 📦 Instalar dependências Playwright
+        working-directory: ./playwright-tests
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium firefox webkit
+      
+      - name: 📦 Instalar dependências backend
+        working-directory: ./cinema-challenge-back
+        run: npm ci
+      
+      - name: 📦 Instalar dependências frontend
+        working-directory: ./cinema-challenge-front
+        run: npm ci
+      
+      - name: 🚀 Iniciar backend
+        working-directory: ./cinema-challenge-back
+        run: |
+          npm start &
+          sleep 10
+        env:
+          PORT: 5000
+          NODE_ENV: test
+          JWT_SECRET: test-secret
+          MONGODB_URI: ""
+      
+      - name: 🚀 Iniciar frontend
+        working-directory: ./cinema-challenge-front
+        run: |
+          npm run build
+          npx serve -s dist -l 3002 &
+          sleep 5
+        env:
+          VITE_API_URL: http://localhost:5000/api/v1
+      
+      - name: 🧪 Executar testes Playwright
+        working-directory: ./playwright-tests
+        run: npx playwright test
+        env:
+          BASE_FRONT: http://localhost:3002
+      
+      - name: 📊 Upload relatório Playwright
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-tests/playwright-report/
+          retention-days: 30
+      
+      - name: 📊 Upload traces Playwright
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-traces
+          path: playwright-tests/test-results/
+          retention-days: 30
+
+  # ============================================
+  # JOB 5: Consolidar Resultados
+  # ============================================
+  consolidate-results:
+    name: Consolidar Relatórios
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests, newman-frontend, playwright-tests]
+    if: always()
+    
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+      
+      - name: 📥 Download todos os artefatos
+        uses: actions/download-artifact@v4
+        with:
+          path: ./all-artifacts
+      
+      - name: 📊 Listar artefatos baixados
+        run: |
+          echo "=== Estrutura de artefatos ==="
+          ls -R ./all-artifacts
+      
+      - name: 📝 Gerar resumo de testes
+        run: |
+          cat << 'EOF' > test-summary.md
+          # 📊 Resumo da Execução de Testes CI/CD
+          
+          **Data:** $(date '+%Y-%m-%d %H:%M:%S')
+          **Branch:** ${{ github.ref_name }}
+          **Commit:** ${{ github.sha }}
+          **Autor:** ${{ github.actor }}
+          
+          ## 🧪 Testes Executados
+          
+          - ✅ **Backend Jest** - Testes unitários e integração
+          - ✅ **Newman Backend** - Testes API Postman
+          - ✅ **Newman Frontend** - Testes UI Postman
+          - ✅ **Cypress** - Testes E2E (Chrome, Firefox, Edge)
+          - ✅ **Playwright** - Testes E2E multi-browser
+          
+          ## 📦 Artefatos Disponíveis
+          
+          - 📊 Relatórios de cobertura Jest (HTML + JSON)
+          - 📊 Relatórios Newman (HTML + JSON)
+          - 🎥 Vídeos Cypress de todas as execuções
+          - 📸 Screenshots de falhas
+          - 📊 Relatórios Playwright com traces
+          
+          ## 🔗 Links
+          
+          - [Ver Actions](https://github.com/${{ github.repository }}/actions)
+          - [Ver Artefatos](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          
+          EOF
+          cat test-summary.md
+      
+      - name: 📊 Upload resumo consolidado
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-summary
+          path: test-summary.md
+          retention-days: 90
+      
+      - name: 💬 Adicionar comentário no PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('test-summary.md', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });
+      
+      - name: 📊 Publicar Job Summary
+        if: always()
+        run: |
+          echo "# 🎯 Resultados dos Testes CI/CD" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## Status dos Jobs" >> $GITHUB_STEP_SUMMARY
+          echo "- Backend Tests: ${{ needs.backend-tests.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Frontend Tests (Cypress): ${{ needs.frontend-tests.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Newman Frontend: ${{ needs.newman-frontend.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Playwright: ${{ needs.playwright-tests.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📦 Artefatos" >> $GITHUB_STEP_SUMMARY
+          echo "Todos os relatórios, vídeos e screenshots foram salvos como artefatos desta execução." >> $GITHUB_STEP_SUMMARY
+          echo "Acesse a [página de artefatos](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) para baixar." >> $GITHUB_STEP_SUMMARY

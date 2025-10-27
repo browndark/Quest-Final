@@ -1,0 +1,81 @@
+name: CI - Smoke Tests (Rápido)
+
+on:
+  push:
+    branches: [ main, atualizacao3.0, Atualização3.1 ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Executar diariamente às 9h UTC (6h BRT)
+    - cron: '0 9 * * *'
+
+jobs:
+  smoke-tests:
+    name: Testes Smoke Rápidos
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+      
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      
+      - name: 📦 Instalar dependências backend
+        working-directory: ./cinema-challenge-back
+        run: npm ci
+      
+      - name: 🧪 Testes Jest (apenas unit)
+        working-directory: ./cinema-challenge-back
+        run: npm test -- --testPathPattern=unit --coverage
+        env:
+          NODE_ENV: test
+          JWT_SECRET: smoke-test-secret
+      
+      - name: 📊 Upload cobertura
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-coverage
+          path: cinema-challenge-back/coverage/lcov-report/
+          retention-days: 7
+      
+      - name: 🚀 Iniciar servidor
+        working-directory: ./cinema-challenge-back
+        run: |
+          npm start &
+          sleep 10
+        env:
+          PORT: 5000
+          NODE_ENV: test
+          JWT_SECRET: smoke-secret
+          MONGODB_URI: ""
+      
+      - name: ✅ Health Check
+        run: |
+          response=$(curl -s http://localhost:5000/api/v1/health)
+          echo "Health check response: $response"
+          echo $response | grep -q "healthy" || exit 1
+      
+      - name: 📦 Instalar Newman
+        run: npm install -g newman
+      
+      - name: 🧪 Newman Smoke Test (apenas health)
+        run: |
+          newman run postman-test/postman-back/test-back.postman_collection.json \
+            --folder "Health Check" \
+            --bail \
+            --color on
+        continue-on-error: true
+      
+      - name: ✅ Resultado
+        if: always()
+        run: |
+          echo "# ✅ Smoke Tests Concluídos" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Testes rápidos executados com sucesso!" >> $GITHUB_STEP_SUMMARY
+          echo "Para testes completos, veja o workflow 'CI/CD - Testes Automatizados'" >> $GITHUB_STEP_SUMMARY

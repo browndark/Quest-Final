@@ -6,6 +6,11 @@
 > **Data:** Outubro/2025  
 > **Projeto:** Cinema Challenge (Full-stack QA & Test Automation)
 
+![CI/CD](https://github.com/browndark/Quest-Final/actions/workflows/ci.yml/badge.svg)
+![Smoke Tests](https://github.com/browndark/Quest-Final/actions/workflows/smoke-tests.yml/badge.svg)
+![Node Version](https://img.shields.io/badge/node-18.x%20|%2020.x-brightgreen)
+![Coverage](https://img.shields.io/badge/coverage-branches%2046.9%25-yellow)
+
 ---
 
 ## * Sumário Rápido
@@ -228,6 +233,69 @@
 | Playwright | `playwright-tests/playwright-report` |
 | Cypress | `cinema-challenge-front/cypress/e2e` |
 | Vitest | `cinema-challenge-front/tests/` |
+
+---
+
+## 🚀 CI/CD - GitHub Actions
+
+### Workflows Automatizados
+
+O projeto conta com **2 workflows** configurados no GitHub Actions:
+
+#### 1. **CI/CD - Testes Automatizados** (Completo)
+- ✅ **Backend Jest** - 71 testes (unit + integration) em Node 18.x e 20.x
+- ✅ **Newman Backend** - Testes Postman da API
+- ✅ **Newman Frontend** - Testes Postman do UI
+- ✅ **Cypress E2E** - Multi-browser (Chrome, Firefox, Edge)
+- ✅ **Playwright** - Testes em Chromium, Firefox e WebKit
+
+**Artefatos Publicados:**
+- 📊 Relatórios de cobertura Jest (HTML)
+- 📊 Relatórios Newman (HTML + JSON)
+- 🎥 Vídeos Cypress de todas as execuções
+- 📸 Screenshots de falhas
+- 📊 Relatórios Playwright com traces
+- 📝 Resumo consolidado
+
+**Tempo de Execução:** ~10-15 minutos  
+**Retenção:** 30 dias (90 dias para resumo)
+
+#### 2. **CI - Smoke Tests** (Rápido)
+- ✅ Testes Jest unitários
+- ✅ Health check do servidor  
+- ✅ Newman smoke test básico
+
+**Tempo de Execução:** ~5 minutos  
+**Schedule:** Diariamente às 9h UTC (6h BRT)
+
+### Como Acessar os Artefatos
+
+1. Acesse a [aba Actions](https://github.com/browndark/Quest-Final/actions)
+2. Clique em uma execução do workflow
+3. Role até a seção "Artifacts"
+4. Baixe os relatórios desejados:
+   - `jest-coverage-report-*.zip`
+   - `newman-backend-reports-*.zip`
+   - `cypress-videos-*.zip`
+   - `cypress-screenshots-*.zip`
+   - `playwright-report.zip`
+
+### Executar Manualmente
+
+Via GitHub UI:
+```
+Actions → CI/CD - Testes Automatizados → Run workflow
+```
+
+Via GitHub CLI:
+```bash
+gh workflow run ci.yml --ref Atualização3.1
+gh run list --workflow=ci.yml
+```
+
+📚 **Documentação completa:** [`.github/workflows/README.md`](.github/workflows/README.md)
+
+---
 
 ## * Postman — Resultados das execuções (Front & Back)
 
