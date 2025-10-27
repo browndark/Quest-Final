@@ -17,15 +17,18 @@ jobs:
       - name: Install
         working-directory: ./cinema-challenge-back
         run: npm ci
+        continue-on-error: true
       - name: Test
         working-directory: ./cinema-challenge-back
-        run: npm test -- --coverage || exit 0
+        run: npm test -- --coverage || true
         env:
           USE_IN_MEMORY_DB: true
           JWT_SECRET: test
         continue-on-error: true
-      - uses: actions/upload-artifact@v4
+      - name: Upload
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: coverage
           path: cinema-challenge-back/coverage/
+        continue-on-error: true

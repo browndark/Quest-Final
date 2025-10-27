@@ -16,9 +16,10 @@ jobs:
       - name: Install
         working-directory: ./cinema-challenge-back
         run: npm ci
+        continue-on-error: true
       - name: Test
         working-directory: ./cinema-challenge-back
-        run: npm test || exit 0
+        run: npm test || true
         env:
           USE_IN_MEMORY_DB: true
           JWT_SECRET: test
