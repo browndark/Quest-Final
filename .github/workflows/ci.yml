@@ -1,11 +1,9 @@
 ﻿name: CI
 on:
   push:
-    branches: [ Atualização3.1 ]
+    branches: [Atualização3.1]
 jobs:
-  pass:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Pass
-        run: echo "ok"
-        run: echo "ok"
+      - run: echo success
