@@ -1,24 +1,45 @@
-# 🚀 GitHub Actions - CI/CD Workflows
+# 🚀 GitHub Actions Workflows - Cinema Challenge# 🚀 GitHub Actions - CI/CD Workflows
 
-Esta pasta contém os workflows de CI/CD do projeto Cinema Challenge.
 
-## 📋 Workflows Disponíveis
 
-### 1. **CI/CD - Testes Automatizados** (`ci.yml`)
+## ✅ Workflows Ativos e PublicadosEsta pasta contém os workflows de CI/CD do projeto Cinema Challenge.
 
-Workflow completo que executa todos os testes automatizados do projeto.
 
-**Triggers:**
+
+### 1. CI/CD Pipeline (`ci.yml`)## 📋 Workflows Disponíveis
+
+**Status:** ✅ **ATIVO E PUBLICADO**  
+
+**Trigger:** Push e Pull Request para `main`, `organização`, `Atualização3.1`### 1. **CI/CD - Testes Automatizados** (`ci.yml`)
+
+
+
+**Jobs Executados:**Workflow completo que executa todos os testes automatizados do projeto.
+
+- ✅ **Backend Tests (Jest):** 109 testes unitários com cobertura
+
+- ✅ **Frontend Build:** Validação e build do Vite**Triggers:**
+
 - Push em branches: `main`, `atualizacao3.0`, `Atualização3.1`
-- Pull Requests para essas branches
-- Execução manual via `workflow_dispatch`
+
+### 2. Testes Aprofundados (`smoke-tests.yml`)- Pull Requests para essas branches
+
+**Status:** ✅ **ATIVO E PUBLICADO**  - Execução manual via `workflow_dispatch`
+
+**Jobs:** Unit Tests (109) + Cypress E2E (42+) + Test Summary
 
 **Jobs Executados:**
 
+**Total:** 150+ testes automatizados executando em CI/CD
+
 #### 🔧 Backend Tests (Jest + Newman)
-- **Matriz:** Node.js 18.x e 20.x
+
+---- **Matriz:** Node.js 18.x e 20.x
+
 - **Testes:** 71 testes Jest (unit + integration)
-- **Cobertura:** Statements, Branches, Functions, Lines
+
+**Documentação completa:** Ver arquivo para detalhes de artifacts, troubleshooting e métricas.- **Cobertura:** Statements, Branches, Functions, Lines
+
 - **Newman:** Testes Postman da API backend
 - **Artefatos:**
   - `jest-coverage-report-node-*.zip` - Relatórios HTML de cobertura

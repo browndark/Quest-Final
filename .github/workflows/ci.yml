@@ -1,15 +1,70 @@
-﻿name: CI
-on: [push, pull_request]
+﻿name: CI/CD Pipeline
+on: 
+  push:
+    branches: [ main, organização, Atualização3.1 ]
+  pull_request:
+    branches: [ main, organização ]
+
 jobs:
-  build:
+  backend-tests:
+    name: Backend Tests (Jest)
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: CI Check
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: cinema-challenge-back/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: cinema-challenge-back
+        run: npm ci
+      
+      - name: Run Jest tests with coverage
+        working-directory: cinema-challenge-back
+        run: npm test -- --coverage --coverageReporters=text --coverageReporters=lcov
+      
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: backend-coverage
+          path: cinema-challenge-back/coverage/
+          retention-days: 30
+      
+      - name: Test Summary
+        if: always()
         run: |
-          echo "✅ CI pipeline executado com sucesso"
-          echo "Branch: ${{ github.ref }}"
-          echo "Commit: ${{ github.sha }}"
-      - name: Success
-        run: exit 0
+          echo "✅ Backend Tests Completed"
+          echo "📊 Coverage reports uploaded"
+
+  frontend-lint:
+    name: Frontend Lint & Build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: cinema-challenge-front/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: cinema-challenge-front
+        run: npm ci
+      
+      - name: Build frontend
+        working-directory: cinema-challenge-front
+        run: npm run build
+      
+      - name: Build Summary
+        run: echo "✅ Frontend build successful"
