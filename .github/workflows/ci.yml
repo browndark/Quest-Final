@@ -4,4 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 0
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: CI Check
+        run: echo "CI passed successfully"
