@@ -9,8 +9,11 @@
 ![CI/CD](https://github.com/browndark/Quest-Final/actions/workflows/ci.yml/badge.svg)
 ![Testes Aprofundados](https://github.com/browndark/Quest-Final/actions/workflows/smoke-tests.yml/badge.svg)
 ![Node Version](https://img.shields.io/badge/node-18.x%20|%2020.x-brightgreen)
-![Tests](https://img.shields.io/badge/tests-66%20passed%20(93%25)-success)
-![Coverage](https://img.shields.io/badge/coverage-branches%2046.9%25-yellow)
+![Tests](https://img.shields.io/badge/tests-109%20passed%20(100%25)-success)
+![Coverage](https://img.shields.io/badge/coverage-54.94%25%20statements-green)
+![Branches](https://img.shields.io/badge/branches-69.02%25-green)
+![Controllers](https://img.shields.io/badge/controllers-92.85%25-brightgreen)
+![Models](https://img.shields.io/badge/models-97.43%25-brightgreen)
 
 ---
 
@@ -18,16 +21,18 @@
 
 | Área / Ferramenta | Resultados | Cobertura / Status |
 |-------------------|-------------|---------------------|
-| **Backend (Jest)** | ✅ 5 suítes / 71 testes (66 passed) | Statements: 36.12% • Branches: 46.9% • Functions: 44.26% |
+| **Backend (Jest)** | ✅ 8 suítes / 109 testes (100% passed) | Statements: 54.94% • Branches: 69.02% • Functions: 67.21% |
+| **Cobertura Controllers** | ✅ 92.85% | authController, movieController, reservationController, sessionController, theaterController, userController |
+| **Cobertura Models** | ✅ 97.43% | Movie, Reservation, Session, Theater, User |
 | **Cypress (E2E)** | ✅ 15 testes / 5 suítes (100% passed) | Login, Registro, Filmes, Reservas • Screenshots + Videos |
 | **Playwright (E2E)** | ✅ 2 passed | smoke funcional |
 | **Robot (API)** | ⚠️ 2 passed / 1 falhou (login 401) | requer MongoDB configurado |
 | **Robot (UI)** | ❌ 1 passed / 2 falharam | code 130 / ERR_CONNECTION_REFUSED |
 | **Postman/Newman** | ✅ Backend + Frontend collections | Relatórios JSON/HTML gerados |
 | **Vitest (Front)** | ✅ 1 smoke | runner operacional |
-| **CI/CD (Actions)** | ✅ 2 workflows | ci.yml + smoke-tests.yml • Artefatos publicados |
+| **CI/CD (Actions)** | ✅ 2 workflows ativos | ci.yml + smoke-tests.yml • Badges funcionando |
 
-**Total de Testes Automatizados: 88+ testes** distribuídos em 6 frameworks
+**Total de Testes Automatizados: 130+ testes** distribuídos em 6 frameworks
 
 ## 📊 **RESUMO DAS ISSUES**
 
@@ -55,37 +60,49 @@
 ## 🧩 Relatório Consolidado de Testes
 
 ### Backend (Jest)
-- Suítes executadas: **5**
-- Testes: **71** (66 passaram, 5 com issues menores)
+- Suítes executadas: **8**
+- Testes: **109** (100% passando ✅)
 - Cobertura agregada:
-  - Statements: 36.12%
-  - Lines: 36.57%
-  - Functions: 44.26% (+29% vs anterior)
-  - Branches: 46.9% (+41% vs anterior)
+  - Statements: **54.94%** (+18.82% vs anterior)
+  - Lines: **55.35%**
+  - Functions: **67.21%** (+22.95% vs anterior)
+  - Branches: **69.02%** (+22.12% vs anterior)
 - Artefatos:
   - `cinema-challenge-back/coverage/lcov-report/index.html`
-  - `cinema-challenge-back/tests/unit/` - Testes unitários
+  - `cinema-challenge-back/tests/unit/` - Testes unitários (7 arquivos)
   - `cinema-challenge-back/tests/integration/` - Testes de integração
+  - `cinema-challenge-back/COVERAGE-ANALYSIS.md` - Análise detalhada
 
 **Testes Criados:**
 - `authController.test.js` - 13 testes (register, login, getProfile, updateProfile)
-- `movieController.test.js` - 16 testes (CRUD completo + paginação + filtros)
-- `reservationController.test.js` - 17 testes (criação, cancelamento, autorização)
 - `authMiddleware.test.js` - 9 testes (protect, authorize)
-- `auth.test.js` (integração) - 16 testes com MongoDB em memória
+- `movieController.test.js` - 16 testes (CRUD completo + paginação + filtros)
+- `reservationController.test.js` - 14 testes (criação, cancelamento, autorização)
+- `sessionController.test.js` - 13 testes (CRUD + populate + filtros)
+- `theaterController.test.js` - 13 testes (CRUD completo)
+- `userController.test.js` - 12 testes (getUsers, getUserById, update, delete)
+- `auth.test.js` (integração) - 17 testes com MongoDB em memória
 
-**Cobertura por Controller:**
-- ✅ `authController.js`: 97.67% statements, 100% branches, 100% functions
-- ✅ `movieController.js`: 100% statements, 100% branches, 100% functions
-- ✅ `reservationController.js`: 89.24% statements, 76.36% branches, 100% functions
-- ✅ `auth.js` (middleware): 95.23% statements, 100% branches, 100% functions
+**Cobertura por Camada:**
+- ✅ **Controllers: 92.85%** (6 controllers com alta cobertura)
+  - `authController.js`: 97.67% statements, 100% branches, 100% functions
+  - `movieController.js`: 100% statements, 100% branches, 100% functions
+  - `reservationController.js`: 93.54% statements, 87.27% branches, 100% functions
+  - `sessionController.js`: 79.26% statements, 80% branches, 71.42% functions
+  - `theaterController.js`: 100% statements, 100% branches, 100% functions
+  - `userController.js`: 100% statements, 100% branches, 100% functions
+- ✅ **Models: 97.43%** (Movie, Reservation, Session, Theater, User)
+- ✅ **Middleware: 68.51%** (auth.js: 95.23%, error.js: 51.51%)
 
 **Observações:**
-- Cobertura de branches aumentou de 5.55% para 46.9% (+41.35%)
-- Cobertura de functions aumentou de 15.21% para 44.26% (+29.05%)
-- 3 controllers principais com cobertura ≥89%
-- Testes de integração funcionais com `mongodb-memory-server`
-- Dependências adicionadas: `jest`, `supertest`, `mongodb-memory-server`
+- ✅ Cobertura de statements aumentou de 36.12% para **54.94%** (+18.82%)
+- ✅ Cobertura de branches aumentou de 46.9% para **69.02%** (+22.12%) - **META ALCANÇADA!**
+- ✅ Cobertura de functions aumentou de 44.26% para **67.21%** (+22.95%)
+- ✅ 6 controllers com cobertura entre 79% e 100%
+- ✅ Todos os 109 testes passando (100%)
+- ✅ Testes de integração funcionais com `mongodb-memory-server`
+- ✅ Cenários negativos implementados (400, 401, 404, 409)
+- ✅ Análise completa documentada em `COVERAGE-ANALYSIS.md`
 
 ### Playwright (E2E smoke)
 - Testes: 2 passed  
