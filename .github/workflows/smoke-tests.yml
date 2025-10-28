@@ -8,7 +8,7 @@ on:
 
 jobs:
   unit-tests:
-    name: Unit Tests (109 testes)
+    name: Unit Tests (141 testes)
     runs-on: ubuntu-latest
     
     steps:
@@ -33,10 +33,11 @@ jobs:
       - name: Display test summary
         if: always()
         run: |
-          echo "✅ Unit Tests: 109 testes executados"
-          echo "📊 Cobertura: 54.94% statements, 69.02% branches"
+          echo "✅ Unit Tests: 141 testes executados"
+          echo "📊 Cobertura: 57.14% statements, 73.45% branches"
           echo "🎯 Controllers: 92.85%"
           echo "🎯 Models: 97.43%"
+          echo "🎯 Middleware: 98.14%"
   
   cypress-e2e:
     name: Cypress E2E Tests (42+ testes)
@@ -82,7 +83,7 @@ jobs:
         continue-on-error: true
       
       - name: Upload Cypress screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: cypress-screenshots
@@ -90,7 +91,7 @@ jobs:
           retention-days: 7
       
       - name: Upload Cypress videos
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-videos
@@ -119,15 +120,16 @@ jobs:
           echo "# 📊 Test Summary - Cinema Challenge" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## ✅ Tests Executed" >> $GITHUB_STEP_SUMMARY
-          echo "- **Backend Unit Tests:** 109 testes" >> $GITHUB_STEP_SUMMARY
+          echo "- **Backend Unit Tests:** 141 testes" >> $GITHUB_STEP_SUMMARY
           echo "- **Cypress E2E Tests:** 42+ testes" >> $GITHUB_STEP_SUMMARY
-          echo "- **Total:** 150+ testes automatizados" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total:** 180+ testes automatizados" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 📈 Coverage Metrics" >> $GITHUB_STEP_SUMMARY
-          echo "- **Statements:** 54.94%" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branches:** 69.02% ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- **Statements:** 57.14%" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branches:** 73.45% ✅" >> $GITHUB_STEP_SUMMARY
           echo "- **Controllers:** 92.85%" >> $GITHUB_STEP_SUMMARY
           echo "- **Models:** 97.43%" >> $GITHUB_STEP_SUMMARY
+          echo "- **Middleware:** 98.14%" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "## 🎯 Quality Metrics" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ All unit tests passing" >> $GITHUB_STEP_SUMMARY

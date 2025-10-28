@@ -30,7 +30,7 @@ jobs:
         run: npm test -- --coverage --coverageReporters=text --coverageReporters=lcov
       
       - name: Upload coverage reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: backend-coverage
