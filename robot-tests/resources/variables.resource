@@ -3,5 +3,7 @@
 ${BASE_API}      http://localhost:3000/api/v1
 # Frontend (Vite default port 3002). Use 127.0.0.1 to avoid IPv6 (::1) resolution issues.
 ${BASE_FRONT}    http://127.0.0.1:3002
+# Credenciais devem corresponder aos usuários criados pelo seed (npm run seed)
+# Ver: cinema-challenge-back/src/utils/setup-test-users.js
 ${ADMIN_EMAIL}   admin@example.com
-${ADMIN_PASS}    admin123
+${ADMIN_PASS}    password123
