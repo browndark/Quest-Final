@@ -86,12 +86,32 @@ jobs:
         working-directory: cinema-challenge-front
         run: npm ci
       
+      - name: Wait for MongoDB
+        run: |
+          for i in {1..30}; do
+            if mongosh --eval "db.adminCommand({ping: 1})" > /dev/null 2>&1; then
+              echo "MongoDB is ready"
+              break
+            fi
+            echo "Waiting for MongoDB... ($i/30)"
+            sleep 2
+          done
+      
       - name: Start backend server
         working-directory: cinema-challenge-back
         run: |
           npm start &
           echo $! > backend.pid
-          sleep 10
+          sleep 15
+          # Verificar se o servidor está respondendo
+          for i in {1..30}; do
+            if curl -f http://localhost:5000/api/v1/health > /dev/null 2>&1; then
+              echo "Backend is ready"
+              break
+            fi
+            echo "Waiting for backend... ($i/30)"
+            sleep 2
+          done
         env:
           PORT: 5000
           NODE_ENV: test
@@ -103,11 +123,20 @@ jobs:
         run: |
           npm run dev &
           echo $! > frontend.pid
-          sleep 10
+          sleep 15
+          # Verificar se o frontend está respondendo
+          for i in {1..30}; do
+            if curl -f http://localhost:3002 > /dev/null 2>&1; then
+              echo "Frontend is ready"
+              break
+            fi
+            echo "Waiting for frontend... ($i/30)"
+            sleep 2
+          done
       
       - name: Run Cypress tests
         working-directory: cinema-challenge-front
-        run: npx cypress run --browser chrome
+        run: npx cypress run --browser chrome --headless
         continue-on-error: true
       
       - name: Upload Cypress screenshots
@@ -134,7 +163,7 @@ jobs:
       
       - name: Test Summary
         if: always()
-        run: echo "✅ Cypress E2E Tests: 42+ testes executados"
+        run: echo "✅ Cypress E2E Tests executado (pode ter falhas conhecidas em CI)"
   
   test-summary:
     name: Test Summary Report
