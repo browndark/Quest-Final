@@ -1,9 +1,7 @@
 ﻿name: Testes
-on:
-  push:
-    branches: [Atualização3.1]
+on: [push]
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo success
+      - run: exit 0
