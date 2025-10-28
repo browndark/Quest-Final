@@ -10,6 +10,17 @@ jobs:
     name: Backend Tests (Jest)
     runs-on: ubuntu-latest
     
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -28,6 +39,10 @@ jobs:
       - name: Run Jest tests with coverage
         working-directory: cinema-challenge-back
         run: npm test -- --coverage --coverageReporters=text --coverageReporters=lcov
+        env:
+          MONGODB_URI: mongodb://localhost:27017/cinema-test
+          JWT_SECRET: test-secret-key-ci
+          NODE_ENV: test
       
       - name: Upload coverage reports
         uses: actions/upload-artifact@v4

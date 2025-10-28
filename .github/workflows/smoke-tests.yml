@@ -11,6 +11,17 @@ jobs:
     name: Unit Tests (141 testes)
     runs-on: ubuntu-latest
     
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,6 +40,10 @@ jobs:
       - name: Run all unit tests
         working-directory: cinema-challenge-back
         run: npm test -- --coverage --ci
+        env:
+          MONGODB_URI: mongodb://localhost:27017/cinema-test
+          JWT_SECRET: test-secret-key-ci
+          NODE_ENV: test
       
       - name: Display test summary
         if: always()
@@ -42,6 +57,17 @@ jobs:
   cypress-e2e:
     name: Cypress E2E Tests (42+ testes)
     runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     
     steps:
       - name: Checkout code
@@ -69,6 +95,8 @@ jobs:
         env:
           PORT: 5000
           NODE_ENV: test
+          MONGODB_URI: mongodb://localhost:27017/cinema-test
+          JWT_SECRET: test-secret-key-ci
       
       - name: Start frontend server
         working-directory: cinema-challenge-front
