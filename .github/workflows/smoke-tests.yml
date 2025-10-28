@@ -1,0 +1,14 @@
+﻿name: Testesname: Testes
+
+on: [push]on: [push]
+
+jobs:jobs:
+
+  build:  build:
+
+    runs-on: ubuntu-latest    runs-on: ubuntu-latest
+
+    steps:    steps:
+
+      - run: exit 0      - run: exit 0
+
