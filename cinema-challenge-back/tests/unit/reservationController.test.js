@@ -99,6 +99,7 @@ describe('ReservationController - Unit Tests', () => {
   describe('getReservationById', () => {
     it('deve retornar reserva se usuário é o dono', async () => {
       req.params.id = 'reservation123';
+      req.user = { _id: { toString: () => 'user123' }, role: 'user' };
 
       const mockReservation = {
         _id: 'reservation123',
@@ -107,13 +108,10 @@ describe('ReservationController - Unit Tests', () => {
       };
 
       // Mock do encadeamento: findById().populate().populate()
-      const mockChain = {
-        populate: jest.fn().mockReturnThis()
-      };
-      // O último populate retorna a reserva
-      mockChain.populate.mockResolvedValueOnce(mockChain).mockResolvedValueOnce(mockReservation);
-
-      Reservation.findById.mockReturnValue(mockChain);
+      const secondPopulate = jest.fn().mockResolvedValue(mockReservation);
+      const firstPopulate = jest.fn().mockReturnValue({ populate: secondPopulate });
+      
+      Reservation.findById.mockReturnValue({ populate: firstPopulate });
 
       await getReservationById(req, res, next);
 
@@ -127,12 +125,10 @@ describe('ReservationController - Unit Tests', () => {
     it('deve retornar erro 404 se reserva não encontrada', async () => {
       req.params.id = 'reservation123';
 
-      const mockChain = {
-        populate: jest.fn().mockReturnThis()
-      };
-      mockChain.populate.mockResolvedValueOnce(mockChain).mockResolvedValueOnce(null);
-
-      Reservation.findById.mockReturnValue(mockChain);
+      const secondPopulate = jest.fn().mockResolvedValue(null);
+      const firstPopulate = jest.fn().mockReturnValue({ populate: secondPopulate });
+      
+      Reservation.findById.mockReturnValue({ populate: firstPopulate });
 
       await getReservationById(req, res, next);
 
@@ -146,7 +142,7 @@ describe('ReservationController - Unit Tests', () => {
 
     it('deve retornar erro 403 se usuário não é dono nem admin', async () => {
       req.params.id = 'reservation123';
-      req.user = { _id: 'otherUser', role: 'user' };
+      req.user = { _id: { toString: () => 'otherUser' }, role: 'user' };
 
       const mockReservation = {
         _id: 'reservation123',
@@ -154,12 +150,10 @@ describe('ReservationController - Unit Tests', () => {
         session: 'session1'
       };
 
-      const mockChain = {
-        populate: jest.fn().mockReturnThis()
-      };
-      mockChain.populate.mockResolvedValueOnce(mockChain).mockResolvedValueOnce(mockReservation);
-
-      Reservation.findById.mockReturnValue(mockChain);
+      const secondPopulate = jest.fn().mockResolvedValue(mockReservation);
+      const firstPopulate = jest.fn().mockReturnValue({ populate: secondPopulate });
+      
+      Reservation.findById.mockReturnValue({ populate: firstPopulate });
 
       await getReservationById(req, res, next);
 
@@ -173,7 +167,7 @@ describe('ReservationController - Unit Tests', () => {
 
     it('deve permitir acesso se usuário é admin', async () => {
       req.params.id = 'reservation123';
-      req.user = { _id: 'admin123', role: 'admin' };
+      req.user = { _id: { toString: () => 'admin123' }, role: 'admin' };
 
       const mockReservation = {
         _id: 'reservation123',
@@ -181,12 +175,10 @@ describe('ReservationController - Unit Tests', () => {
         session: 'session1'
       };
 
-      const mockChain = {
-        populate: jest.fn().mockReturnThis()
-      };
-      mockChain.populate.mockResolvedValueOnce(mockChain).mockResolvedValueOnce(mockReservation);
-
-      Reservation.findById.mockReturnValue(mockChain);
+      const secondPopulate = jest.fn().mockResolvedValue(mockReservation);
+      const firstPopulate = jest.fn().mockReturnValue({ populate: secondPopulate });
+      
+      Reservation.findById.mockReturnValue({ populate: firstPopulate });
 
       await getReservationById(req, res, next);
 
