@@ -111,7 +111,7 @@ Causa raiz: ausência de token (login retornou 401).
 
 Recomendações: garantir que o usuário admin/de teste exista e o login retorne o token; então reexecutar para validar criação e testes de concorrência.
 
-<img src="../../assets/postfront.png" alt="Resultados dos testes Postman Frontend" width="800">
+![Resultados dos testes Postman Frontend](../../assets/postfront.png)
 
 
 
